@@ -17,14 +17,16 @@
       <q-card-section class="q-pt-xs">
         <div class="text-overline text-orange">{{ article.categoryName }}
         </div>
-        <div class="text-h6 q-mt-sm q-mb-xs">{{article.name}}
-          <!-- {{ $mq === 'xs' ? article.name.substring(0,12) : $mq === 'sm' ?
-            article.name.substring(0,11) : article.name.substring(0,11)}} -->
+        <div class="text-h6 q-mt-sm q-mb-xs">
+          <!-- {{article.name}} -->
+          {{ $mq === 'xs' ? (article.name.length > 17 ? article.name.substring(0,15) + '...' : article.name) : $mq === 'sm' ?
+            (article.name.length > 13 ? article.name.substring(0,11) + '...' : article.name) : (article.name.length > 15 ? article.name.substring(0,13) + '...' : article.name)}}
         </div>
-        <div class="text-caption text-grey">{{article.description}}
-          <!-- {{ $mq === 'xs' ? article.description.substring(0,130)
+        <div class="text-caption text-grey">
+          <!-- {{article.description}} -->
+          {{ $mq === 'xs' ? (article.description.length > 28 ? article.description.substring(0,26) + '...' : article.description)
             : $mq === 'sm' ? article.description.substring(0,50)
-            : article.description.substring(0,80)}} -->
+            : article.description.substring(0,80)}}
         </div>
       </q-card-section>
     </q-card-section>
@@ -45,12 +47,12 @@
       >
         editar
       </q-btn>
-            <q-btn
+      <q-btn
         flat
         color="primary"
         @click.stop="estado = !estado"
       >
-      {{ estado | abrirFechar}}
+        {{ estado | abrirFechar}}
       </q-btn>
     </q-card-actions>
   </q-card>
@@ -61,7 +63,7 @@ export default {
   name: 'ArticleItem',
   props: ['article'],
   filters: {
-    abrirFechar(val) {
+    abrirFechar (val) {
       if (val == false) {
         return 'fechado'
       } else {

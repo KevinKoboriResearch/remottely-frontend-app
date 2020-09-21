@@ -2,9 +2,9 @@
   <q-layout
     class="selectDisable"
     :view="user ? 'hHh LpR lFf' : 'hHh LpR lff'"
-    :style="$q.dark.isActive ? 'background:linear-gradient( 135deg, #c1f4ff 10%, #162b4d 100%)' : 'background:linear-gradient( 135deg, #162b4d 10%, #c1f4ff 100%)'"
+    :style="$q.dark.isActive ? 'background:linear-gradient( 180deg, #16434d 0%, #c1f4ff 100%)' : 'background:linear-gradient( 180deg, #c1f4ff 0%, #16434d 100%)'"
   >
-    <!-- :style="$q.dark.isActive ? 'background:linear-gradient( 180deg, #16434d 0%, #c1f4ff 100%)' : 'background:linear-gradient( 180deg, #c1f4ff 0%, #16434d 100%)'" -->
+    <!-- :style="$q.dark.isActive ? 'background:white' : 'background:black'" -->
     <q-header
       v-if="!validatingToken"
       height-hint="98"
@@ -13,6 +13,7 @@
     >
       <q-toolbar v-scrollanimation>
         <q-btn
+          v-if="user"
           square
           dense
           flat
@@ -22,31 +23,32 @@
           <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip>
         </q-btn>
 
-        <q-space v-if="!user && $q.screen.lt.sm" />
+        <!-- <q-space v-if="!user && $q.screen.lt.sm" /> -->
+        <q-space v-if="!user" />
 
-        <div>
+        <!-- @click="$q.dark.toggle()" -->
+        <div @click="$router.push('/')">
           <img
             style="margin-top: 8px;"
             class="q-px-sm"
-            @click="$q.dark.toggle()"
-            src="../assets/logo/your-design-trans-white.png"
+            src="../assets/logo/remottely.png"
             height="22"
           >
-          <q-tooltip v-if="$q.screen.gt.xs">projects</q-tooltip>
+          <!-- <q-tooltip v-if="$q.screen.gt.xs">theme</q-tooltip> -->
         </div>
 
         <q-space />
 
-        <q-space v-if="!user && $q.screen.lt.sm" />
+        <!-- <q-space v-if="!user && $q.screen.lt.sm" /> -->
 
-        <q-space />
+        <!-- <q-space /> -->
 
         <UserDropdown
           v-scrollanimation
           v-if="user && !right"
         />
 
-        <q-btn
+        <!-- <q-btn
           v-if="!user"
           dense
           flat
@@ -66,13 +68,13 @@
           @click="right = !right"
         >
           <q-tooltip v-if="$q.screen.gt.xs">config</q-tooltip>
-        </q-btn>
+        </q-btn> -->
 
       </q-toolbar>
 
       <q-tabs
         v-scrollanimation
-        v-if="!user"
+        v-if="!user && $route.fullPath != '/auth'"
       >
         <q-space v-if="$q.screen.gt.xs" />
         <q-route-tab
@@ -87,24 +89,31 @@
           label="Serviços"
           to="/services"
         />
-        <q-route-tab
+        <!-- <q-route-tab
           label="Dúvidas"
           to="/doubts"
+        /> -->
+        <!-- icon="account" -->
+        <q-route-tab
+          label="Login"
+          to="/auth"
         />
+
       </q-tabs>
     </q-header>
 
-      <!-- :show-if-above="$route.fullPath != '/auth' && !validatingToken" -->
+    <!-- show-if-above -->
     <q-drawer
-    show-if-above
+      v-if="!validatingToken && user"
+      :show-if-above="$route.fullPath != '/auth'"
       v-model="left"
       side="left"
       bordered
       content-class="bg-white"
     >
-      <LeftDrawer v-if="!user" />
-      <LeftDrawerAdmin v-else-if="user.admin" />
-      <LeftDrawerUser v-else />
+      <!-- <LeftDrawer v-if="!user" /> -->
+      <LeftDrawerUser v-if="!user.admin" />
+      <LeftDrawerAdmin v-else />
     </q-drawer>
 
     <q-drawer
@@ -129,26 +138,25 @@
         />
       </div>
     </q-page-container>
-    <whatsapp />
+    <whatsapp v-if="$route.fullPath != '/auth'" />
 
     <q-footer
       v-if="!validatingToken"
-      bordered
       class="selectDisable bg-black text-white"
     >
 
       <q-toolbar
         v-scrollanimation
-        v-if="!user"
+        v-if="!user && $route.fullPath != '/auth'"
       >
         <img
           src="../assets/logo/your.png"
           height="25"
           class
         >
-        <q-toolbar-title>
-          Projects
-        </q-toolbar-title>
+        <!-- <q-toolbar-title>
+          Your
+        </q-toolbar-title> -->
       </q-toolbar>
       <q-tabs
         v-scrollanimation
@@ -165,7 +173,7 @@
         >
         </q-route-tab>
         </a> -->
-                <q-route-tab
+        <q-route-tab
           label="Account"
           to="/dashboard"
         />
@@ -182,6 +190,34 @@
           to="/tutorials"
         /> -->
       </q-tabs>
+      <q-tabs
+        v-scrollanimation
+        v-if="!user && $route.fullPath == '/auth'"
+      >
+        <q-space v-if="$q.screen.gt.xs" />
+        <q-route-tab
+          label="Início"
+          to="/"
+        />
+        <q-route-tab
+          label="Sobre"
+          to="/about"
+        />
+        <q-route-tab
+          label="Serviços"
+          to="/services"
+        />
+        <!-- <q-route-tab
+          label="Dúvidas"
+          to="/doubts"
+        /> -->
+        <!-- icon="account" -->
+        <q-route-tab
+          label="Login"
+          to="/auth"
+        />
+
+      </q-tabs>
     </q-footer>
 
   </q-layout>
@@ -196,7 +232,7 @@ import { mapState } from "vuex"
 // import Content from "../components/template/Content"
 // import Footer from "../components/template/Footer"
 import Loading from "../components/template/Loading"
-import LeftDrawer from "../components/template/LeftDrawer"
+// import LeftDrawer from "../components/template/LeftDrawer"
 import LeftDrawerAdmin from "../components/template/LeftDrawerAdmin"
 import LeftDrawerUser from "../components/template/LeftDrawerUser"
 import RightDrawer from "../components/template/RightDrawer"
@@ -205,7 +241,7 @@ import whatsapp from '../components/whatsapp/Dynamicwhatsapp'
 // import Btn from '../components/template/Btn'
 
 export default {
-  name: "App",
+  name: "MainLayout",
   components: {
     UserDropdown,
     // Btn,
@@ -213,7 +249,7 @@ export default {
     // Content,
     // Footer,
     Loading,
-    LeftDrawer,
+    // LeftDrawer,
     LeftDrawerUser,
     LeftDrawerAdmin,
     RightDrawer,
@@ -270,7 +306,7 @@ export default {
 
       if (!userData) {
         this.validatingToken = false
-        this.$router.push({ name: 'auth' })
+        // this.$router.push({ name: 'auth' })
         return
       }
 
@@ -300,7 +336,7 @@ export default {
 .before-enter {
   opacity: 0;
   filter: blur(5px);
-  transition: all 2s ease-out;
+  transition: all 1s ease-out;
 }
 
 .enter {

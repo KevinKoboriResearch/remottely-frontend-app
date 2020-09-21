@@ -10,10 +10,10 @@ import AdminPages from '../pages/admin/AdminPages'
 import ArticlesByCategory from '../pages/article/ArticlesByCategory'
 import AllArticles from '../pages/article/AllArticles'
 import ArticleById from '../pages/article/ArticleById'
-import Auth from '../pages/auth/Pricing'
-import Error404 from '../pages/Error404.vue'
+import Auth from '../pages/auth/Auth'
+import Error404 from '../pages/Error404'
 // import allCategories from '../pages/category/allCategories'
-import Tutorials from '../pages/user/Tutorials'
+import Tutorials from '../pages/static/doubts/Tutorials'
 import Dashboard from '../pages/user/Dashboard'
 
 
@@ -56,6 +56,12 @@ const routes = [
       { name: 'error', path: '*', component: Error404 }
     ]
   }
+  // {
+  //   path: '/',
+  //   component: () => import('layouts/MainLayout.vue'),
+  //   children: [
+  //     //free routes
+  //     { name: 'auth', path: 'auth', component: Auth }]
   // {
   //   name: 'auth',
   //   path: '/auth',

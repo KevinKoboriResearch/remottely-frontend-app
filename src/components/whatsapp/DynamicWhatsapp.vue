@@ -11,7 +11,7 @@
         :disable="draggingFab"
         class="shadow-0 text-white"
         padding="none"
-        style="background-color:#00000000; border-top-left-radius: 50px; border-top-right-radius: 50px;
+        style="background-color:#000000; border-top-left-radius: 50px; border-top-right-radius: 50px;
         border-bottom-left-radius: 0px; border-bottom-right-radius: 50px;"
       >
         <q-icon
@@ -154,6 +154,7 @@
 
 <script>
 export default {
+  name: 'DynamicWhatsapp',
   data: () => ({
     fab: false,
     menu: false,

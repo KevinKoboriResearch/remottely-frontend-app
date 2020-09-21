@@ -2,18 +2,16 @@
   <div class="q-pa-xs">
     <!-- {{user}} -->
     <div class="fit row no-wrap justify-between items-start content-start">
-      <q-toolbar class="q-mb-xs bg-pink text-white shadow-2 rounded-borders">
-        <!-- style="max-height: 2px;" -->
-        <!-- icon="close" -->
-        <q-btn
-          label="Sair"
+      <q-toolbar class="q-mb-xs bg-cyan-10 text-white shadow-2 rounded-borders">
+        <!-- <q-btn
+          label="Fechar"
           padding="none"
           class="q-pa-xs q-mr-sm"
           size="md"
           flat
           dense
           @click.prevent="right = !right"
-        />
+        /> -->
         <q-space />
         <q-btn
           round
@@ -32,102 +30,42 @@
           flat
           dense
           @click="$q.fullscreen.toggle()"
-          :icon="inFullscreen ? 'fas fa-compress' : 'fas fa-expand'"
+          :icon="$q.fullscreen.isActive  ? 'fas fa-compress' : 'fas fa-expand'"
         />
-        <!-- :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" -->
       </q-toolbar>
-      <!-- v-if="!props.inFullscreen" -->
-      <!-- <div class="col-auto">
-      </div>
-       <div class="col-auto">
-      </div>
-       <div class="col-auto">
-      </div>
-       <div class="col-auto">
-      </div> -->
-      <!-- <div class="col-auto">
-        <q-btn
-          dense
-          @click.prevent="right = !right"
-          class="bg-white text-black q-mb-sm"
-        >fechar
-        </q-btn>
-      </div>
-      <div class="col-auto">
-        <q-btn-dropdown
-          dense
-          @click="$q.dark.toggle()"
-          :label="$q.dark.isActive ? 'Modo Escuro': 'Modo Claro'"
-          dropdown-icon="fa fa-adjust"
-          class="bg-white text-black q-mb-sm q-ml-sm"
-        />
-      </div>
-      <div class="col-auto">
-        <q-btn
-          dense
-          color="orange"
-          class="q-mb-sm q-ml-sm"
-          @click="$q.fullscreen.toggle()"
-          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-        />
-      </div>
-      <div class="col-auto">
-        <q-btn
-          dense
-          color="orange"
-          class="q-mb-sm q-ml-sm"
-          @click="$q.fullscreen.toggle()"
-          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-        />
-      </div> -->
     </div>
-    <!-- @mouseover.native="menuOver = true"
-      @mouseout.native="menuOver = false" -->
-    <!-- <q-space/> -->
-    <!-- </q-btn-dropdown> -->
-    <!-- <q-btn
-      dense
-      color="orange"
-      class="q-mb-sm q-ml-sm"
-      @click="$q.fullscreen.toggle()"
-      :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-    /> -->
     <q-card class="my-card">
       <q-item>
         <q-item-section avatar>
-          <!-- <q-avatar>
-            <img src="https://cdn.quasar.dev/img/avatar2.jpg">
-          </q-avatar> -->
           <q-btn
             @click="perfilPhoto = true"
             round
           >
-            <q-avatar size="40px">
-              <!-- <img src="https://cdn.quasar.dev/img/avatar2.jpg" /> -->
-              <img :src="dataUrl">
+            <q-avatar size="80px">
+              <!-- :src="dataUrl" -->
+              <img src="https://cdn.quasar.dev/img/avatar2.jpg">
             </q-avatar>
           </q-btn>
         </q-item-section>
         <q-item-section>
-          <q-item-label>Manuzera</q-item-label>
-          <q-item-label caption>Formacao: medicina veterinaria</q-item-label>
+          <!-- <q-item-label>{{user.name}}</q-item-label>
+          <q-item-label caption>Admin: {{user.admin ? 'sim' : 'não'}}</q-item-label> -->
+          <div class="text-h6">Nome: {{user.name}}</div>
+          <div class="text-subtitle2">Admin: {{user.admin ? 'sim' : 'não'}}</div>
         </q-item-section>
       </q-item>
       <q-card-section>
-        <div class="text-h6">Empresa: Your Pets</div>
-        <div class="text-subtitle2">Cargo: Veterianria , assistente cirurgica</div>
+        <div class="text-h6">Empresa: Hotel Bahamas</div>
+        <div class="text-subtitle2">Cargo: seguranca do portao principal</div>
       </q-card-section>
       <q-separator />
 
       <q-card-actions vertical>
         <q-btn
           label="Editar"
-          color="primary"
+          color="cyan-10"
           @click="toolbar = true"
         />
-        <!-- <q-separator /> -->
-        <!-- {{user.id+ 'oi'}} -->
-        <!-- v-if="user.admin === false" -->
         <q-btn
           class="q-mt-sm"
           color="primary"
@@ -195,10 +133,66 @@
           />
         </q-toolbar>
 
-        <q-card-section>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
-        </q-card-section>
-        <div class="row justify-center bg-red q-ma-xs rounded-borders">
+        <!-- <q-card-section> -->
+        <div class="row justify-center bg-teal-8 text-white q-ma-xs rounded-borders">
+          <q-input
+            square
+            dense
+            standout
+            v-model="user.name"
+            :class="$q.dark.isActive ? 'bg-black' : ''"
+            input-class="text-left"
+            style="width: 100%;"
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if="treeFilter === ''"
+                name="search"
+              />
+              <q-icon
+                v-else
+                name="clear"
+                class="cursor-pointer"
+                @click="treeFilter = ''"
+              />
+            </template>
+          </q-input>
+        </div>
+        <div class="row justify-center bg-teal-8 text-white q-ma-xs rounded-borders">
+          <q-input
+            square
+            dense
+            standout
+            v-model="user.cellphone"
+            :class="$q.dark.isActive ? 'bg-black' : ''"
+            input-class="text-left"
+            style="width: 100%;"
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if="treeFilter === ''"
+                name="search"
+              />
+              <q-icon
+                v-else
+                name="clear"
+                class="cursor-pointer"
+                @click="treeFilter = ''"
+              />
+            </template>
+          </q-input>
+        </div>
+        <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore. -->
+        <!-- </q-card-section> -->
+        <div class="row justify-center bg-teal-8 text-white q-ma-xs rounded-borders">
+          <q-btn
+            square
+            @click.prevent="confirmDelete()"
+            flat
+            style="min-width: 100%;"
+          >Enviar</q-btn>
+        </div>
+        <div class="row justify-center bg-red text-white q-ma-xs rounded-borders">
           <q-btn
             square
             @click.prevent="confirmDelete()"
@@ -376,14 +370,6 @@
         size="lg"
       />
     </div>
-    <!-- <q-btn
-        class="bg-black q-mt-xs"
-        color="
-      red"
-        @click.prevent="confirmDelete()"
-        flat
-        style="min-width: 100%;"
-      >Apagar Conta</q-btn> -->
   </div>
 </template>
 
@@ -394,7 +380,7 @@ import { QSpinnerGears } from 'quasar'
 import { VueEditor } from "vue2-editor"
 
 export default {
-  name: 'UserArticles',
+  name: 'UserProfile',
   components: { VueEditor },
   data () {
     return {

@@ -26,7 +26,7 @@
       <!-- <q-btn class="bg-green">oi</q-btn> -->
       <img
         @click="$router.go()"
-        src="../../assets/logo/your-design-trans-white.png"
+        src="../../assets/logo/remottely.png"
         height="22"
       >
     </q-page-sticky>
@@ -55,6 +55,7 @@
 
 <script>
 export default {
+  name: 'Loading',
   data () {
     return {
       // crep: false

@@ -416,7 +416,7 @@ import { VueEditor } from "vue2-editor"
 // Quill.register("modules/imageResize", ImageResize)
 
 export default {
-  name: 'ArticleAdmin',
+  name: 'DeviceAdmin',
   components: { VueEditor },
   data: function () {
     return {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Lock />
     <UserProfile v-if="$store.state.user.user" />
     <!-- <q-toolbar :class="$q.dark.isActive ? 'bg-black text-white': 'bg-white text-black'">
       <q-input
@@ -42,11 +43,14 @@ import { baseApiUrl } from '../../global'
 import Tree from 'liquor-tree'
 import axios from 'axios'
 import UserProfile from '../../pages/user/UserProfile'
+import Lock from './Lock'
 
 export default {
+  name: 'RightDrawer',
   components: {
     Tree,
-    UserProfile
+    UserProfile,
+    Lock
   },
   computed: {
     isMenuVisible: {

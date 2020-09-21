@@ -1,25 +1,12 @@
 <template>
   <div>
-    <!-- {{categories}} -->
     <q-toolbar class="q-pa-sm">
-      <!-- <q-toolbar
-        dense
-        class="bg-orange q-pa-sm"
-      > -->
-      <!-- :class="$q.dark.isActive ? 'bg-grey-10 text-white': 'text-black'" -->
-      <!-- <q-input
-        standout="bg-teal text-white"
-        class="bg-orange"
-        v-model="text"
-        label="Custom standout"
-      /> -->
-      <!-- bg-color="green" -->
       <q-input
         square
         dense
         standout
-        :class="$q.dark.isActive ? 'bg-black' : 'bg-grey-3'"
         v-model="treeFilter"
+        :class="$q.dark.isActive ? 'bg-black' : 'bg-deep-purple-5'"
         input-class="text-left"
         style="width: 100%;"
       >
@@ -36,7 +23,6 @@
           />
         </template>
       </q-input>
-      <!-- </q-toolbar> -->
     </q-toolbar>
     <q-btn
       dense
@@ -48,7 +34,6 @@
       icon="fas fa-plus-square"
       class="q-mx-md q-mt-sm"
     >
-      <!-- <i class="fas fa-plus-square"></i> -->
     </q-btn>
     <Tree
       v-if="renderComponent"
@@ -66,40 +51,36 @@
           size="10px"
           padding="none"
           icon="fas fa-pen-square"
-          class="q-ml-sm text-orange-10"
+          class="q-ml-sm text-primary"
           @click.stop="editNode(node)"
         />
-        <!-- style="color: #f34636;" -->
-        <q-btn
+        <!-- <q-btn
           flat
           dense
           size="10px"
           padding="none"
           icon="fas fa-minus-square"
-          class="q-ml-sm text-orange-10"
+          class="q-ml-sm text-primary"
           @click.stop="removeNode(node)"
         />
-        <!-- style="color: #f34636;" -->
         <q-btn
           flat
           dense
           size="10px"
           padding="none"
           icon="fas fa-plus-square"
-          class="q-ml-sm text-orange-10"
+          class="q-ml-sm text-primary"
           @click.stop="addChildNode(node)"
-        />
-        <!-- style="color: #f34636;" -->
+        /> -->
         <q-btn
           flat
           dense
           size="10px"
           padding="none"
           icon="fas fa-sticky-note"
-          class="q-ml-sm text-orange-10"
+          class="q-ml-sm text-primary"
           @click.stop="onNodeArticles(node)"
         />
-        <!-- style="color: #f34636;" -->
       </div>
     </Tree>
   </div>
@@ -118,41 +99,19 @@ export default {
       user: {},
       minum: false,
       category: {},
-      // nodeData: null,
       treeFilter: '',
       treeData: this.getTreeData(),
       treeOptions: {
-        // data: { 'text': 'name' },
         propertyNames: {
           'text': 'name'
-          // 'userId': 'userId'
-        }, //, 'userId': 'userId'
+        },
         filter: { emptyText: 'Categoria não encontrada' }
-        // fetchData: (node) => {
-        //   return treeData[node.id - 1].userId
-        // },
       },
       renderComponent: true,
     }
   },
   methods: {
-    // userEditable (id) {
-    //   let userAcessible = false
-    //   // console.log(this.treeData)
-    //   for (let i = 0; i < this.treeData.length; i++) {
-    //     // if (this.treeData[i].id == id && this.treeData[i].userId == user.id) {
-    //     userAcessible = true
-    //     // console.log(userAcessible)
-    //     // }
-    //   }
-    //   return userAcessible
-    //   // const compareId = treeData.filter(td => {
-    //   //   td.userId == this.user.id
-    //   // })
-    //   // if (compareId == node.id)
-    //   // console.log(node)
-    // },
-    reloadMinum2 () {
+    reloadMinum () {
       if (this.minum == true) {
         location.reload()
       }
@@ -166,15 +125,15 @@ export default {
       });
     },
     editNode (node, e) {
-      this.reloadMinum2()
+      this.reloadMinum()
       node.startEditing()
     },
     removeNode (node) {
       axios.delete(`${baseApiUrl}/categories/${node.id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess()
-          // this.forceRerenderTree()
-          // location.reload()
+          this.forceRerenderTree()
+          location.reload()
         })
         .catch(showError)
     },
@@ -211,19 +170,9 @@ export default {
       }
       return result;
     },
-    // loadCategory (node) {
-    //   const category = {}
-    //   const url = `${baseApiUrl}/categories${node.id}`
-    //   axios.get(url).then(res => {
-    //     category = res.data.map(category => {
-    //       return { id: category.id, name: category.name, parentId: category.parentId }
-    //     })
-    //   })
-    //   return category
-    // },
     addNew () {
       this.category = {}
-      this.category.name = this.user.name + ' ' + this.makeid(5)
+      this.category.name = this.user.name + ' movel ' + this.makeid(5)
       this.category.userId = this.user.id
       const method = this.category.id ? 'put' : 'post'
       const id = this.category.id ? `/${this.category.id}` : ''

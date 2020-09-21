@@ -226,7 +226,7 @@ import axios from 'axios'
 import { QSpinnerGears } from 'quasar'
 
 export default {
-  name: 'CategoryAdmin',
+  name: 'UserCategories',
   data () {
     return {
       user: {},

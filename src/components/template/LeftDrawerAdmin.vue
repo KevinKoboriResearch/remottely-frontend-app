@@ -1,12 +1,11 @@
 <template>
   <div>
-    <q-toolbar
-      class="q-pa-sm"
-      :class="$q.dark.isActive ? 'bg-grey-10 text-white': 'text-black'"
-    >
+    <q-toolbar class="q-pa-sm">
       <q-input
+        square
         dense
         standout
+        :class="$q.dark.isActive ? 'bg-black' : 'bg-grey-3'"
         v-model="treeFilter"
         input-class="text-left"
         style="width: 100%;"
@@ -27,12 +26,15 @@
     </q-toolbar>
     <q-btn
       dense
+      flat
+      size="15px"
+      padding="none"
       @click.stop="addNew()"
-      icon="mdi-file-tree"
-      size="12px"
-      class="q-mx-md q-mt-md"
-      :class="$q.dark.isActive ? 'bg-grey-10 text-white': 'text-teal'"
-    />
+      color="black"
+      icon="fas fa-plus-square"
+      class="q-mx-md q-mt-sm"
+    >
+    </q-btn>
     <Tree
       v-if="renderComponent"
       :data="treeData"
@@ -42,26 +44,43 @@
       class="tree"
     >
       <div slot-scope="{ node }">
-        <div class="">{{ node.text }}</div>
-        <div>
-          <q-btn
-            dense
-            class="text-teal"
-            @click.stop="editNode(node)"
-          ><i class="q-px-xs fas fa-pen-square"></i></q-btn>
-          <q-btn
-            dense
-            class="text-teal"
-            @click.stop="removeNode(node), minum = true"
-          ><i class="q-px-xs fas fa-minus-square"></i></q-btn>
-          <q-btn
-            dense
-            class="text-teal"
-            @click.stop="addChildNode(node)"
-          >
-            <i class="q-px-xs fas fa-plus-square"></i>
-          </q-btn>
-        </div>
+        {{ node.text }}
+        <q-btn
+          flat
+          dense
+          size="10px"
+          padding="none"
+          icon="fas fa-pen-square"
+          class="q-ml-sm text-primary"
+          @click.stop="editNode(node)"
+        />
+        <!-- <q-btn
+          flat
+          dense
+          size="10px"
+          padding="none"
+          icon="fas fa-minus-square"
+          class="q-ml-sm text-primary"
+          @click.stop="removeNode(node)"
+        />
+        <q-btn
+          flat
+          dense
+          size="10px"
+          padding="none"
+          icon="fas fa-plus-square"
+          class="q-ml-sm text-primary"
+          @click.stop="addChildNode(node)"
+        /> -->
+        <q-btn
+          flat
+          dense
+          size="10px"
+          padding="none"
+          icon="fas fa-sticky-note"
+          class="q-ml-sm text-primary"
+          @click.stop="onNodeArticles(node)"
+        />
       </div>
     </Tree>
   </div>
@@ -73,7 +92,7 @@ import Tree from 'liquor-tree'
 import axios from 'axios'
 
 export default {
-  name: 'LeftDrawerAdmin',
+  name: 'LeftDrawerUser',
   components: { Tree },
   data () {
     return {
@@ -83,15 +102,17 @@ export default {
       treeFilter: '',
       treeData: this.getTreeData(),
       treeOptions: {
-        propertyNames: { 'text': 'name' },
+        propertyNames: {
+          'text': 'name'
+        },
         filter: { emptyText: 'Categoria não encontrada' }
       },
       renderComponent: true,
     }
   },
   methods: {
-    reloadMinum2 () {
-      if (this.minum === true) {
+    reloadMinum () {
+      if (this.minum == true) {
         location.reload()
       }
     },
@@ -104,7 +125,7 @@ export default {
       });
     },
     editNode (node, e) {
-      this.reloadMinum2()
+      this.reloadMinum()
       node.startEditing()
     },
     removeNode (node) {
@@ -131,6 +152,12 @@ export default {
         params: { id: JSON.parse(node.id) }
       })
     },
+    onNodeArticles (node) {
+      this.$router.push({
+        name: 'userArticlesByCategory',
+        params: { id: JSON.parse(node.id) }
+      })
+    },
     makeid (length) {
       var result = '';
       var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -140,19 +167,9 @@ export default {
       }
       return result;
     },
-    loadCategory (node) {
-      const category = {}
-      const url = `${baseApiUrl}/categories${node.id}`
-      axios.get(url).then(res => {
-        category = res.data.map(category => {
-          return { id: category.id, name: category.name, parentId: category.parentId }
-        })
-      })
-      return category
-    },
     addNew () {
       this.category = {}
-      this.category.name = this.makeid(5)
+      this.category.name = this.user.name + ' movel ' + this.makeid(5)
       this.category.userId = this.user.id
       const method = this.category.id ? 'put' : 'post'
       const id = this.category.id ? `/${this.category.id}` : ''
@@ -170,7 +187,7 @@ export default {
         this.category.name = node.text
         this.category.parentId = node.parentId
       } else {
-        this.category.name = this.makeid(5)
+        this.category.name = this.user.name + ' ' + this.makeid(5)
         this.category.parentId = node.id
       }
       this.category.userId = this.user.id
@@ -189,11 +206,13 @@ export default {
     loadUser () {
       const json = localStorage.getItem(userKey)
       this.user = JSON.parse(json)
-    },
+    }
   },
   mounted () {
     this.loadUser()
-    this.$refs.tree.$on('node:clicked', this.onNodeSelect)
+    this.$refs.tree.$on('node:clicked', (node) => {
+      this.onNodeSelect(node)
+    })
     this.$refs.tree.$on('node:editing:stop', (node) => {
       this.save(node, false)
     })

@@ -1,207 +1,238 @@
 <template>
-  <div class="fit row wrap justify-center items-center content-center">
-    <div
-      class="q-pa-md"
-      style="min-width: 300px; max-width: 300px;"
-    >
-      <q-card>
-        {{user}}
-        {{isConnected}}
-        <!-- {{showSignup}} -->
-        <div id="google-signin-button"></div>
-        <facebook-login
-          appId="623142018572569"
-          @login="getUserData(true)"
-          @logout="onLogout"
-          @get-initial-status="getUserData"
-          @sdk-loaded="sdkLoaded"
-        >
-        </facebook-login>
-        <facebook-login
-          appId="623142018572569"
-          @login="getUserData(false)"
-          @logout="onLogout"
-          @get-initial-status="getUserData"
-          @sdk-loaded="sdkLoaded"
-        >
-        </facebook-login>
+  <q-page class="bg-black">
+    <!-- <q-page
+    class="selectDisable"
+    style="background:linear-gradient( 180deg, #16434d 0%, #c1f4ff 100%)"
+  >
+    <q-header class="bg-transparent">
+      <q-toolbar v-scrollanimation>
+        <q-space />
 
-        <q-form
-              @submit="onSubmit"
-      @reset="onReset"
-          class="q-gutter-md"
-          autocorrect="off"
-          autocapitalize="off"
-          autocomplete="off"
-          spellcheck="false"
-        >
-          <!-- style="min-width: 300px; max-width: 300px;" -->
+        <div>
+          <img
+            style="margin-top: 8px;"
+            class="q-px-sm"
+            to="/"
+            src="../../assets/logo/remottely.png"
+            height="22"
+          >
+          <q-tooltip v-if="$q.screen.gt.xs">theme</q-tooltip>
+        </div>
 
-          <q-input
-            v-if="showSignup"
-            filled
-            v-model="user.name"
-            label="Nome e sobrenome"
-            lazy-rules
-            :rules="[ val => val && val.length >= 7 && /\s/.test(val) || 'Insira o nome completo']"
-          />
+        <q-space />
+      </q-toolbar>
+    </q-header> -->
+    <div class="fit row wrap justify-center items-center content-center">
+      <q-card
+        v-if="showSignup"
+        style="background-color: #333; position: absolute; top:19vh;"
+        class="text-white"
+        :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
+      >
+        <q-card-section>
+          <q-avatar
+            style="background-color: #00ff99"
+            size="90px"
+            class="absolute-center shadow-10"
+          >
+            <img src="../../assets/logo/user-logo.png">
+          </q-avatar>
+        </q-card-section>
+        <br>
+        <q-card-section>
+          <q-form
+            class="q-gutter-md"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="off"
+            spellcheck="false"
+          >
 
-          <q-input
-            filled
-            v-model="user.email"
-            label="Email"
-            lazy-rules
-            autocomplete="nope"
-          />
-          <!-- type="email"
-          :rules="[ val => val && !/\s/.test(val) && !this.reg.test(val) || 'Insira um email válido']" -->
-
-          <q-input
-            filled
-            v-model="user.password"
-            label="Senha"
-            type="password"
-            lazy-rules
-            :rules="[ val => val && val.length >= 6 && !/\s/.test(val) || 'minimo 6 caracteres, sem espaços em branco...', ]"
-          />
-
-          <q-input
-            v-if="showSignup"
-            filled
-            v-model="user.confirmPassword"
-            label="Confirme a sua senha"
-            type="password"
-            lazy-rules
-            :rules="[ val => user.password === user.confirmPassword || 'senhas não conferem', ]"
-            autocomplete="nope"
-          />
-          <q-toggle
-            v-if="showSignup"
-            v-model="terms"
-            label="I accept the license and terms"
-            :rules="[ val => val === true || 'senhas não conferem', ]"
-            autocomplete="nope"
-          />
-
-          <div>
-            <q-btn
-              v-if="showSignup"
-              label="Registrar"
-              type="submit"
-              color="primary"
-              @click="signUp()"
+            <q-input
+              dense
+              v-model="user.email"
+              label="Email"
+              lazy-rules
+              autocomplete="nope"
+              type="email"
             />
-            <q-btn
-              v-else
-              label="Entrar"
-              type="submit"
-              color="primary"
-              @click="signIn()"
+
+            <q-input
+              dense
+              v-model="user.password"
+              label="Senha"
+              type="password"
+              lazy-rules
             />
-            <q-btn
-              label="Reset"
-              type="reset"
-              color="primary"
-              flat
-              class="q-ml-sm"
+
+            <q-input
+              dense
+              v-model="user.confirmPassword"
+              label="Confirme a sua senha"
+              type="password"
+              lazy-rules
+              autocomplete="nope"
             />
-            <div>
+
+            <q-input
+              dense
+              v-model="user.name"
+              label="Nome e sobrenome"
+              lazy-rules
+            />
+
+            <q-toggle
+              v-model="terms"
+              label="I accept the license and terms"
+              :rules="[ val => val === true || 'senhas não conferem', ]"
+              autocomplete="nope"
+            />
+            <q-card-actions align="right">
+              <q-btn
+                label="Limpar"
+                type="reset"
+                color="white"
+                flat
+                class="q-ml-sm"
+                @click="user = {}"
+              />
+              <q-btn
+                label="Registrar"
+                type="submit"
+                color="black"
+                @click="signUp()"
+              />
+            </q-card-actions>
+            <q-card-actions
+              vertical
+              align="center"
+            >Já tem cadastro?
+              <!-- class="text-" -->
               <a
+                style="color: #00ff99;"
                 href
                 @click.prevent="showSignup = !showSignup"
               >
-                <span v-if="showSignup">Já tem cadastro? Acesse o Login!</span>
-                <span v-else>Não tem cadastro? Registre-se aqui!</span>
+                <span> Acesse o Login!</span>
               </a>
-            </div>
-          </div>
-        </q-form>
+            </q-card-actions>
+          </q-form>
+        </q-card-section>
+      </q-card>
+      <q-card
+        v-else
+        style="background-color: #333; position: absolute; top:19vh;"
+        class="text-white"
+        :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
+      >
+        <q-card-section>
+          <q-avatar
+            style="background-color: #00ff99"
+            size="90px"
+            class="absolute-center shadow-10"
+          >
+            <img src="../../assets/logo/user-logo.png">
+          </q-avatar>
+        </q-card-section>
+        <br>
+        <q-card-section>
+          <q-form
+            class="q-gutter-md"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="off"
+            spellcheck="false"
+          >
+
+            <q-input
+              dense
+              v-model="user.email"
+              label="Email"
+              lazy-rules
+              autocomplete="nope"
+              type="email"
+            />
+
+            <q-input
+              dense
+              v-model="user.password"
+              label="Senha"
+              type="password"
+              lazy-rules
+            />
+
+            <q-card-actions align="right">
+              <q-btn
+                label="Limpar"
+                type="reset"
+                color="white"
+                flat
+                class="q-ml-sm"
+                @click="user = {}"
+              />
+              <q-btn
+                label="Entrar"
+                type="submit"
+                color="black"
+                @click="signIn()"
+              />
+            </q-card-actions>
+            <q-card-actions
+              vertical
+              align="center"
+            >Não tem cadastro?
+              <a
+                style="color: #00ff99;"
+                href
+                @click.prevent="showSignup=!showSignup"
+              >
+                <span> Registre-se aqui!</span>
+              </a>
+            </q-card-actions>
+          </q-form>
+        </q-card-section>
       </q-card>
     </div>
-  </div>
+    <!-- <q-page-sticky
+      position="bottom-left"
+      :offset="[10, 10]"
+    >
+      <q-btn
+        class="text-black"
+        label="voltar"
+        to="/about"
+      />
+    </q-page-sticky>
+  </q-page> -->
+  </q-page>
 </template>
 
 <script>
 import { baseApiUrl, showError, userKey } from '../../global'
 import axios from 'axios'
-import facebookLogin from 'facebook-login-vuejs'
 
 export default {
   name: 'Auth',
-  components: {
-    facebookLogin
-  },
   data () {
     return {
+      // category: {},
       showSignup: false,
       user: {},
       terms: false,
-      FB: undefined,
-      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+      re: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     }
   },
-  computed: {
-    isConnected: {
-      get () {
-        return this.$store.state.user.isConnectedFacebook
-      },
-      set (val) {
-        this.$store.commit('user/setFacebookUser', val)
-      }
-    }
-  },
+  // computed: {
+  //   isConnected: {
+  //     get () {
+  //       return this.$store.state.user.isConnectedFacebook
+  //     },
+  //     set (val) {
+  //       this.$store.commit('user/setFacebookUser', val)
+  //     }
+  //   }
+  // },
   methods: {
-    //google
-    onSignIn (user) {
-      const profile = user.getBasicProfile()
-    },
-    //facebook
-    getUserData (val) {
-      this.FB.api('/me', 'GET', { fields: 'id,name,email,picture' },
-        user => {
-          this.user.name = user.name;
-          this.user.email = user.email;
-          this.user.password = user.id;
-          this.user.confirmPassword = user.id;
-          this.user.image = user.picture.data.url;
-          this.isConnected = true
-          if (val === true) {
-            axios.post(`${baseApiUrl}/signin`, this.user)
-              .then(res => {
-                this.$store.commit('user/setUser', res.data)
-                localStorage.setItem(userKey, JSON.stringify(res.data))
-                this.$router.push({ path: '/' })
-              })
-              .catch(showError)
-          } else {
-            axios.post(`${baseApiUrl}/signup`, this.user)
-              .then(() => {
-                this.$toasted.global.defaultSuccess()
-                this.showSignup = false
-              })
-              .catch(showError)
-          }
-        }
-      )
-    },
-    sdkLoaded (payload) {
-      this.isConnected = payload.isConnected
-      this.FB = payload.FB
-      if (this.isConnected) this.getUserData()
-    },
-    onLogin (val) {
-      this.getUserData(val)
-      // this.getUserData()
-      // if (val === 'signIn') {
-      //   this.signIn()
-      // } else {
-      //   this.dialogTerms()
-      //   this.signUp()
-      // }
-    },
-    onLogout () {
-      this.isConnected = false;
-    },
     dialogTerms () {
       this.$q.dialog({
         dark: true,
@@ -229,75 +260,59 @@ export default {
         axios.post(`${baseApiUrl}/signup`, this.user)
           .then(() => {
             this.$toasted.global.defaultSuccess()
+            // console.log(this.user)
+            // console.log(this.category)
+            // this.addNew()
             this.showSignup = false
           })
           .catch(showError)
       } else {
         this.dialogTerms()
       }
-    }
-  },
-  mounted () {
-    gapi.signin2.render('google-signin-button', {
-      onsuccess: this.onSignIn
-    })
-  },
+    },
+    // makeid (length) {
+    //   var result = '';
+    //   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //   var charactersLength = characters.length;
+    //   for (var i = 0; i < length; i++) {
+    //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    //   }
+    //   return result;
+    // },
+    // addNew () {
+    //   this.category = {}
+    //   this.category.name = ' movel '
+    //   this.category.userId = 18
+    //   const method = 'post'
+    //   const id = ''
+    //   axios[method](`${baseApiUrl}/categories${id}`, this.category)
+    //     .then(() => {
+    //       this.$toasted.global.defaultSuccess()
+    //       // this.forceRerenderTree()
+    //     })
+    //     .catch(showError)
+    // }
+    // addNew () {
+    //   // axios.post(`${baseApiUrl}/signin`, this.user)
+    //   //   .then(res => {
+    //   //     this.user = JSON.stringify(res.data)
+    //   //     console.log(this.user.id)
+    //   // this.$store.commit('user/setUser', res.data)
+    //   // localStorage.setItem(userKey, JSON.stringify(res.data))
+    //   // this.$router.push({ path: '/' })
+    //   this.category.id = null
+    //   this.category.name = ' movel '
+    //   this.category.userId = 18//this.user.id
+    //   this.category.parentid = null
+    //   // const method = this.category.id ? 'put' : 'post'
+    //   // const id = this.category.id ? `/${this.category.id}` : ''
+    //   axios.post(`${baseApiUrl}/categories`, this.category)
+    //     .then(() => {
+    //       this.$toasted.global.defaultSuccess()
+    //     })
+    //     .catch(showError)
+    //   // })
+    // },
+  }
 }
 </script>
-<style scoped>
-.auth-content {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.auth-modal {
-  background-color: #fff;
-  width: 350px;
-  padding: 35px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.auth-title {
-  font-size: 1.2rem;
-  font-weight: 100;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.auth-modal input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 3px 8px;
-  outline: none;
-}
-
-.auth-modal button {
-  align-self: flex-end;
-  background-color: #2460ae;
-  color: #fff;
-  padding: 5px 15px;
-}
-
-.auth-modal a {
-  margin-top: 35px;
-}
-
-.auth-modal hr {
-  border: 0;
-  width: 100%;
-  height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(120, 120, 120, 0),
-    rgba(120, 120, 120, 0.75),
-    rgba(120, 120, 120, 0)
-  );
-}
-</style>

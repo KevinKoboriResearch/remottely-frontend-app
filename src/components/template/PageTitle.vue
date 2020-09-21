@@ -2,22 +2,23 @@
   <div class="q-pa-none q-ma-none">
     <div class="row">
       <q-toolbar>
-  <q-toolbar-title>
-      <div class="text-overline">
-        {{ sub }}
-      </div>
-  </q-toolbar-title>
-      <q-space />
+        <q-toolbar-title>
+          <div class="text-overline">
+            {{ sub }}
+          </div>
+        </q-toolbar-title>
+        <q-space />
         <q-btn
-        class="q-mr-md"
+          class="q-mr-md"
           label="Mcdonalds.com"
           type="a"
-href="http://localhost:8081/#/">
+          href="http://localhost:8081/#/"
+        >
         </q-btn>
-      <q-btn
-        label="Todos os Artigos"
-        to="/articles"
-      />
+        <q-btn
+          label="Todos os Artigos"
+          to="/articles"
+        />
       </q-toolbar>
     </div>
     <div class="text-h3 q-mt-sm">

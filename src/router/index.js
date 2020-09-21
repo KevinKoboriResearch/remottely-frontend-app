@@ -36,11 +36,11 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     const json = localStorage.getItem(userKey)
 
-    if(to.matched.some(record => record.meta.requiresAdmin)) {
-        const user = JSON.parse(json)
-        user && user.admin ? next() : next({ path: '/' })
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
+      const user = JSON.parse(json)
+      user && user.admin ? next() : next({ path: '/' })
     } else {
-        next()
+      next()
     }
   })
 

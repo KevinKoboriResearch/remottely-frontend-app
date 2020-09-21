@@ -6,7 +6,7 @@
       @mouseout.native="menuOver = false"
       v-model="menu"
       auto-close
-      :label="user.name"
+      :label="user.name.length > 12 ? user.name.substring(0,10) + '...' : user.name"
       size="14px"
       dropdown-icon="mdi-menu-down"
       style="background-color: #ffffff11;"
@@ -36,14 +36,14 @@
             <q-item-label>Meu Perfil</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/user/categories">
+        <!-- <q-item to="/user/categories">
           <q-item-section>
             <q-item-label>Minhas categorias</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
         <q-item to="/user/articles">
           <q-item-section>
-            <q-item-label>Meus Artigos</q-item-label>
+            <q-item-label>Meus Dispositivos</q-item-label>
           </q-item-section>
         </q-item>
         <q-item
@@ -65,6 +65,7 @@ import { userKey } from '../../global'
 // import Gravatar from 'vue-gravatar'
 
 export default {
+  name: 'UserDropDown',
   // components: { Gravatar },
   data () {
     return {
