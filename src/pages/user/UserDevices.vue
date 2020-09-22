@@ -10,7 +10,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.name"
+            v-model="device.name"
             label-slot
             lazy-rules
             clearable
@@ -41,7 +41,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.description"
+            v-model="device.description"
             label-slot
             clearable
           >
@@ -71,7 +71,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.imageUrl"
+            v-model="device.image"
             label-slot
             clearable
           >
@@ -99,19 +99,15 @@
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
           <q-select
-            id="article-parentId"
+            id="device-parentId"
             standout
             :options="categories"
-            v-model="article.categoryId"
+            v-model="device.categoryId"
             map-options
             emit-value
           />
         </div>
       </div>
-      <VueEditor
-        v-model="article.content"
-        placeholder="Informe o Conteúdo do Artigo..."
-      />
       <div class="row">
         <q-btn
           @click="save"
@@ -170,7 +166,7 @@
     </q-toolbar>
     <q-table
       v-if="tableType == 'list' && !showForm"
-      :data="articles"
+      :data="devices"
       :filter="filter"
       :pagination="pagination"
       row-key="name"
@@ -179,7 +175,7 @@
       <!-- :style="$q.screen.gt.xs ? 'min-width: 100%;' : 'max-width: 100%;'" -->
       <template v-slot:top="props">
         <div class="q-ml-xs text-h6">
-          Articles1
+          devices1
         </div>
         <q-btn
           v-if="!props.inFullscreen"
@@ -209,7 +205,6 @@
           flat
           dense
           @click="reset(),
-          article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
           showForm = !showForm"
         />
         <q-btn
@@ -265,7 +260,7 @@
               size="sm"
               flat
               dense
-              @click="loadArticle(props.row), props.expand = !props.expand"
+              @click="loadDevice(props.row), props.expand = !props.expand"
             />
             <q-btn
               icon="delete"
@@ -273,7 +268,7 @@
               class="q-ml-sm"
               flat
               dense
-              @click="loadArticle(props.row), confirmDelete()"
+              @click="loadDevice(props.row), confirmDelete()"
             />
           </q-td>
         </q-tr>
@@ -291,7 +286,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.name"
+                    v-model="device.name"
                     label-slot
                     lazy-rules
                     clearable
@@ -322,7 +317,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.description"
+                    v-model="device.description"
                     label-slot
                     clearable
                   >
@@ -352,7 +347,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.imageUrl"
+                    v-model="device.image"
                     label-slot
                     clearable
                   >
@@ -380,23 +375,22 @@
                 </div>
                 <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
                   <q-select
-                    id="article-parentId"
+                    id="device-parentId"
                     standout
                     :options="categories"
-                    v-model="article.categoryId"
+                    v-model="device.categoryId"
                     map-options
                     emit-value
                   />
                 </div>
               </div>
-              <vue-editor
+              <!-- <vue-editor
                 id="editor"
-                v-model="article.content"
                 placeholder="Informe o Conteúdo do Artigo..."
-              />
+              /> -->
               <div class="row">
                 <q-btn
-                  @click="save('edit')"
+                  @click="save"
                   label="Salvar"
                   type="submit"
                   color="primary"
@@ -471,7 +465,7 @@
       v-if="tableType == 'gridNotes' && !showForm"
       grid
       grid-header
-      :data="articles"
+      :data="devices"
       :pagination="pagination"
       :filter="filter"
       class="q-pa-sm"
@@ -482,7 +476,7 @@
       <!-- hide-pagination -->
       <template v-slot:top="props">
         <div class="q-ml-xs text-h6">
-          Articles2
+          devices2
         </div>
         <q-btn
           padding="none"
@@ -510,7 +504,6 @@
           flat
           dense
           @click="reset(),
-          article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
           showForm = !showForm"
         />
         <q-btn
@@ -563,7 +556,7 @@
               size="sm"
               flat
               dense
-              @click="loadArticle(props.row), props.expand = !props.expand"
+              @click="loadDevice(props.row), props.expand = !props.expand"
             />
             <q-btn
               icon="delete"
@@ -571,7 +564,7 @@
               class="q-ml-sm"
               flat
               dense
-              @click="loadArticle(props.row), confirmDelete()"
+              @click="loadDevice(props.row), confirmDelete()"
             />
           </q-td>
         </q-tr>
@@ -589,7 +582,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.name"
+                    v-model="device.name"
                     label-slot
                     lazy-rules
                     clearable
@@ -620,7 +613,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.description"
+                    v-model="device.description"
                     label-slot
                     clearable
                   >
@@ -650,7 +643,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.imageUrl"
+                    v-model="device.image"
                     label-slot
                     clearable
                   >
@@ -678,10 +671,10 @@
                 </div>
                 <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
                   <q-select
-                    id="article-parentId"
+                    id="device-parentId"
                     standout
                     :options="categories"
-                    v-model="article.categoryId"
+                    v-model="device.categoryId"
                     map-options
                     emit-value
                   />
@@ -689,13 +682,13 @@
               </div>
               <vue-editor
                 id="editor"
-                v-model="article.content"
                 placeholder="Informe o Conteúdo do Artigo..."
               />
               <div class="row">
                 <q-btn
-                  @click="save('edit')"
+                  @click="save"
                   label="Salvar"
+                  v-model="device.content"
                   type="submit"
                   color="primary"
                 />
@@ -769,7 +762,7 @@
       v-if="tableType == 'gridImage' && !showForm"
       grid
       grid-header
-      :data="articles"
+      :data="devices"
       :pagination="pagination"
       :filter="filter"
       class="q-pa-sm"
@@ -779,7 +772,7 @@
       <!-- hide-header -->
       <template v-slot:top="props">
         <div class="q-ml-xs text-h6">
-          Articles3
+          devices3
         </div>
         <q-btn
           padding="none"
@@ -807,7 +800,6 @@
           flat
           dense
           @click="reset(),
-          article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
           showForm = !showForm"
         />
         <q-btn
@@ -835,8 +827,8 @@
           <q-card class="">
             <q-card-section class="text-center">
               <img
-                v-if="props.row.imageUrl"
-                :src="props.row.imageUrl"
+                v-if="props.row.image"
+                :src="props.row.image"
                 style="max-width: 200px;"
               >
               <q-img
@@ -844,7 +836,7 @@
                 class="col-5"
                 :src="require('../../assets/article/1.gif')"
                 style="max-width: 200px;"
-                alt="Article"
+                alt="device"
               />
             </q-card-section>
 
@@ -858,20 +850,21 @@
             </q-card-section>
 
             <q-card-actions align="center">
-              <q-btn
+              <!-- <q-btn
                 icon="edit"
                 round
                 dense
                 class="bg-primary text-white"
-                @click="loadArticle(props.row), props.expand = !props.expand"
+                @click="loadDevice(props.row), props.expand = !props.expand"
               />
               <q-btn
                 icon="delete"
                 round
                 dense
                 class="bg-primary text-white"
-                @click="loadArticle(props.row), confirmDelete()"
-              />
+                @click="loadDevice(props.row), confirmDelete()"
+              /> -->
+              <Lock />
             </q-card-actions>
           </q-card>
         </div>
@@ -939,17 +932,19 @@
 import { baseApiUrl, showError, userKey } from '../../global'
 import axios from 'axios'
 import { QSpinnerGears } from 'quasar'
-import { VueEditor } from "vue2-editor"
 
+// import { VueEditor } from "vue2-editor"
+import Lock from './Lock'
 export default {
-  name: 'UserArticles',
-  components: { VueEditor },
+  name: 'UserDevices',
+  // components: { VueEditor },
+  components: { Lock },
   data: function () {
     return {
       tableType: 'list',
       showForm: false,
-      article: {},
-      articles: [],
+      device: {},
+      devices: [],
       categories: [],
       user: {},
       defaultCodeEditor: 0,
@@ -966,7 +961,7 @@ export default {
   },
   computed: {
     pagesNumber () {
-      return Math.ceil(this.articles.length / this.pagination.rowsPerPage)
+      return Math.ceil(this.devices.length / this.pagination.rowsPerPage)
     }
   },
   watch: {
@@ -987,35 +982,40 @@ export default {
       })
     },
     reset () {
-      this.article = {}
+      this.device = {}
     },
-    save (val) {
-      this.article.userId = this.user.id
-      const method = this.article.id ? 'put' : 'post'
-      const id = this.article.id ? `/${this.article.id}` : ''
-      axios[method](`${baseApiUrl}/articles${id}`, this.article)
+    save () {
+
+      // console.log('oi')
+      // console.log(this.device)
+      // // console.log(this.user)
+      // console.log('oi')
+      this.device.userId = this.user.id
+      const method = this.device.id ? 'put' : 'post'
+      const id = this.device.id ? `/${this.device.id}` : ''
+      axios[method](`${baseApiUrl}/devices${id}`, this.device)
         .then(() => {
           this.$toasted.global.defaultSuccess()
         })
         .catch(showError)
     },
     remove () {
-      const id = this.article.id
-      axios.delete(`${baseApiUrl}/articles/${id}`)
+      const id = this.device.id
+      axios.delete(`${baseApiUrl}/devices/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess()
           this.reset()
         })
         .catch(showError)
     },
-    loadArticle (article) {
-      axios.get(`${baseApiUrl}/articles/${article.id}`)
-        .then(res => this.article = res.data)
+    loadDevice (device) {
+      axios.get(`${baseApiUrl}/devices/${device.id}`)
+        .then(res => this.device = res.data)
     },
-    loadUserArticles () {
-      const url = `${baseApiUrl}/user/${this.user.id}/articles`
+    loadUserDevices () {
+      const url = `${baseApiUrl}/user/${this.user.id}/devices`
       axios.get(url).then(res => {
-        this.articles = res.data
+        this.devices = res.data
       })
     },
     loadCategories () {
@@ -1034,7 +1034,7 @@ export default {
   mounted () {
     this.loadUser()
     this.loadCategories()
-    this.loadUserArticles()
+    this.loadUserDevices()
   }
 }
 </script>

@@ -13,7 +13,7 @@
         active-color="orange"
       >
         <q-tab
-          name="articles"
+          name="devices"
           label="Artigos"
         />
         <q-tab
@@ -35,9 +35,9 @@
         <q-tab-panel
           class="noScroll"
           style="min-height: 410px"
-          name="articles"
+          name="devices"
         >
-          <ArticleAdmin />
+          <DeviceAdmin />
         </q-tab-panel>
 
         <q-tab-panel
@@ -61,7 +61,7 @@
     <!-- <b-card no-body>
                 <b-tabs card>
                     <b-tab title="Artigos" active>
-                        <ArticleAdmin />
+                        <DeviceAdmin />
                     </b-tab>
                     <b-tab title="Categorias">
                         <CategoryAdmin />
@@ -77,16 +77,16 @@
 
 <script>
 import PageTitle from '../../components/template/PageTitle'
-import ArticleAdmin from './ArticleAdmin'
+import DeviceAdmin from './DeviceAdmin'
 import CategoryAdmin from './CategoryAdmin'
 import UserAdmin from './UserAdmin'
 
 export default {
   name: 'AdminPages',
-  components: { PageTitle, ArticleAdmin, CategoryAdmin, UserAdmin },
+  components: { PageTitle, DeviceAdmin, CategoryAdmin, UserAdmin },
   data () {
     return {
-      // tab: 'articles'
+      // tab: 'devices'
     }
   },
   computed: {

@@ -8,7 +8,7 @@
     <q-btn
       flat
       color="primary"
-      @click.stop="onNodeArticles()"
+      @click.stop="onNodeDevice()"
     >
       Editar Categoria
     </q-btn>
@@ -55,8 +55,8 @@
                 ></q-icon>
               </q-item-section>
               <q-item-section class=" q-pa-md q-ml-none  text-white">
-                <q-item-label class="text-white text-h6 text-weight-bolder">{{articles.length == 6 ? '6' : articles.length }}</q-item-label>
-                <q-item-label>Articles</q-item-label>
+                <q-item-label class="text-white text-h6 text-weight-bolder">{{devices.length == 6 ? '6 ou +' : devices.length }}</q-item-label>
+                <q-item-label>devices</q-item-label>
               </q-item-section>
             </q-item>
           </div>
@@ -71,13 +71,13 @@
                 class=" q-pa-lg q-mr-none text-white"
               >
                 <q-icon
-                  name="fab fa-google"
+                  name="fas fa-users"
                   size="24px"
                 ></q-icon>
               </q-item-section>
               <q-item-section class=" q-pa-md q-ml-none  text-white">
-                <q-item-label class="text-white text-h6 text-weight-bolder">50</q-item-label>
-                <q-item-label>Connections</q-item-label>
+                <q-item-label class="text-white text-h6 text-weight-bolder">17</q-item-label>
+                <q-item-label>Usuarios</q-item-label>
               </q-item-section>
             </q-item>
           </div>
@@ -97,8 +97,8 @@
                 ></q-icon>
               </q-item-section>
               <q-item-section class=" q-pa-md q-ml-none  text-white">
-                <q-item-label class="text-white text-h6 text-weight-bolder">1020</q-item-label>
-                <q-item-label> Website Visits</q-item-label>
+                <q-item-label class="text-white text-h6 text-weight-bolder">1023</q-item-label>
+                <q-item-label>Acões</q-item-label>
               </q-item-section>
             </q-item>
           </div>
@@ -107,44 +107,44 @@
     </q-card>
     <q-toolbar :class="$q.dark.isActive ? 'text-white': 'text-black'">
       <q-input
-        @change="getArticlesByCategory"
+        @change="getDevicesByCategory"
         placeholder="pesquise aqui os artigos desta categoria..."
         dense
         standout
-        v-model="searchArticle"
+        v-model="searchDevice"
         input-class="text-left"
         style="width: 100%;"
       >
         <template v-slot:append>
           <q-icon
-            v-if="searchArticle === ''"
+            v-if="searchDevice === ''"
             name="search"
           />
           <q-icon
             v-else
             name="clear"
             class="cursor-pointer"
-            @click="searchArticle = ''"
+            @click="searchDevice = ''"
           />
         </template>
       </q-input>
     </q-toolbar>
     <div class="fit row wrap justify-start items-start content-start">
       <div
-        v-if="searchArticle === '' || article.name.includes(searchArticle) || article.description.includes(searchArticle)"
+        v-if="searchDevice === '' || device.name.includes(searchDevice) || device.description.includes(searchDevice)"
         class="q-pt-md q-px-md col-xs-12 col-sm-6 col-md-4"
-        v-for="article in articles"
-        :key="article.id"
+        v-for="device in devices"
+        :key="device.id"
       >
-        <ArticleItem :article="article" />
+        <DeviceItem :device="device" />
       </div>
     </div>
     <div class="column justify-center items-center">
       <q-btn
         v-if="loadMore"
         class="bg-orange-14 text-black"
-        label="Carregar Mais Artigos"
-        @click="getArticlesByCategory"
+        label="Carregar Mais Dispositivos"
+        @click="getDevicesByCategory"
       />
     </div>
   </div>
@@ -154,31 +154,31 @@
 import { baseApiUrl, userKey } from '../../global'
 import axios from 'axios'
 import PageTitle from '../../components/template/PageTitle'
-import ArticleItem from './ArticleItem'
+import DeviceItem from './DeviceItem'
 
 export default {
-  name: 'ArticlesByCategory',
-  components: { PageTitle, ArticleItem },
+  name: 'DevicesByCategory',
+  components: { PageTitle, DeviceItem },
   data () {
     return {
-      searchArticle: '',
-      searchArticleAll: '',
+      searchDevice: '',
+      searchDeviceAll: '',
       category: {},
       categories: [],
       countCategories: 0,
       count: 0,
       categoryYet: [],
-      articles: [],
+      devices: [],
       page: 1,
-      loadMore: true
+      loadMore: false
     }
   },
   methods: {
-    onNodeArticles (id) {
-      if (this.articles.length >= 0) {
+    onNodeDevice (id) {
+      if (this.devices.length >= 0) {
         this.$router.push({
-          name: 'userArticlesByCategory',
-          params: { id: JSON.parse(this.articles[0].categoryId) }
+          name: 'userDeviceByCategory',
+          params: { id: JSON.parse(this.devices[0].categoryId) }
         })
       }
     },
@@ -186,12 +186,22 @@ export default {
       const url = `${baseApiUrl}/categories/${this.category.id}`
       axios(url).then(res => this.category = res.data)
     },
-    getArticlesByCategory () {
-      const url = `${baseApiUrl}/categories/${this.category.id}/articles?page=${this.page}`
+    getDevicesByCategory () {
+      const url = `${baseApiUrl}/categories/${this.category.id}/devices?page=${this.page}`
       axios(url).then(res => {
-        this.articles = this.articles.concat(res.data)
+        this.devices = this.devices.concat(res.data)
         this.page++
-        if (res.data.length === 0) this.loadMore = false
+        let remainder = this.devices.length % 6
+        if (remainder == 0) {
+          if (res.data.length === 0) {
+            this.loadMore = false
+          }
+          else {
+            this.loadMore = true
+          }
+        } else {
+          this.loadMore = false
+        }
       })
     },
     countTree (cat) {
@@ -206,7 +216,6 @@ export default {
       const url = `${baseApiUrl}/user/${this.user.id}/categories/tree`
       axios.get(url).then(res => {
         this.categories = res.data
-        console.log(this.categories)
         this.countTree(this.categories)
         this.countCategories = this.count
         this.count = 0
@@ -220,19 +229,19 @@ export default {
   watch: {
     $route (to) {
       this.category.id = to.params.id
-      this.articles = []
+      this.devices = []
       this.page = 1
-      this.loadMore = true
+      // this.loadMore = true
 
       this.getCategory()
-      this.getArticlesByCategory()
+      this.getDevicesByCategory()
       this.loadCategories()
     }
   },
   mounted () {
     this.category.id = this.$route.params.id
     this.getCategory()
-    this.getArticlesByCategory()
+    this.getDevicesByCategory()
     this.loadCategories()
   }
 }

@@ -77,7 +77,7 @@
           class="q-ml-sm text-primary"
           @click.stop="editNode(node)"
         />
-        <!-- <q-btn
+        <q-btn
           flat
           dense
           size="10px"
@@ -94,7 +94,7 @@
           icon="fas fa-plus-square"
           class="q-ml-sm text-primary"
           @click.stop="addChildNode(node)"
-        /> -->
+        />
         <q-btn
           flat
           dense
@@ -102,7 +102,7 @@
           padding="none"
           icon="fas fa-sticky-note"
           class="q-ml-sm text-primary"
-          @click.stop="onNodeArticles(node)"
+          @click.stop="onNodeDevices(node)"
         />
       </div>
     </Tree>
@@ -171,13 +171,13 @@ export default {
     },
     onNodeSelect (node) {
       this.$router.push({
-        name: 'articlesByCategory',
+        name: 'devicesByCategory',
         params: { id: JSON.parse(node.id) }
       })
     },
-    onNodeArticles (node) {
+    onNodeDevices (node) {
       this.$router.push({
-        name: 'userArticlesByCategory',
+        name: 'userDevicesByCategory',
         params: { id: JSON.parse(node.id) }
       })
     },

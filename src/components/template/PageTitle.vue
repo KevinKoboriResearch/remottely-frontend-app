@@ -27,7 +27,7 @@
       <q-space />
       <q-btn
         label="Pesquisar Todos os Artigos"
-        to="/articles"
+        to="/devices"
       />
     </div>
     <h1><i

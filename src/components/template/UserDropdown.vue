@@ -41,7 +41,7 @@
             <q-item-label>Minhas categorias</q-item-label>
           </q-item-section>
         </q-item> -->
-        <q-item to="/user/articles">
+        <q-item to="/user/devices">
           <q-item-section>
             <q-item-label>Meus Dispositivos</q-item-label>
           </q-item-section>

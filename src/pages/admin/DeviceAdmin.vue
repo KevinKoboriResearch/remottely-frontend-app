@@ -1,5 +1,5 @@
 <template>
-  <div class="article-admin">
+  <div class="device-admin">
     <q-form
       v-show="showForm"
       class="q-gutter-md"
@@ -9,7 +9,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.name"
+            v-model="device.name"
             label-slot
             hint="Nome - necessário pelo menos 2 caracteres"
             lazy-rules
@@ -42,7 +42,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.description"
+            v-model="device.description"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -73,7 +73,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.imageUrl"
+            v-model="device.imageUrl"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -102,21 +102,19 @@
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
           <q-select
-            id="article-parentId"
             standout
             :options="categories"
-            v-model="article.categoryId"
+            v-model="device.categoryId"
             map-options
             emit-value
           />
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
-          {{article.userId}}
+          {{device.userId}}
           <q-select
-            id="category-parentId"
             standout
             :options="users"
-            v-model="article.userId"
+            v-model="device.userId"
             map-options
             emit-value
           />
@@ -124,7 +122,7 @@
       </div>
       <!-- @focus="onEditorFocus" -->
       <VueEditor
-        v-model="article.content"
+        v-model="device.content"
         placeholder="Informe o Conteúdo do Artigo..."
       />
       <div class="row">
@@ -156,7 +154,7 @@
     </q-form>
     <q-table
       v-show="!showForm"
-      :data="articles"
+      :data="devices"
       row-key="name"
       separator="cell"
       style="min-witdh: 100%;"
@@ -168,7 +166,7 @@
               flat
               class="bg-green q-mr-sm"
               @click="reset(),
-              article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
+              device.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
               showForm = !showForm"
             >
               <i class="fa fa-user-plus"></i>
@@ -191,14 +189,14 @@
             <q-btn
               class="bg-yellow q-mr-sm"
               flat
-              @click="loadArticle(props.row), props.expand = !props.expand"
+              @click="loadDevice(props.row), props.expand = !props.expand"
             >
               <i class="fa fa-user-edit"></i>
             </q-btn>
             <q-btn
               class="bg-red"
               flat
-              @click="loadArticle(props.row), confirmDelete()"
+              @click="loadDevice(props.row), confirmDelete()"
             >
               <i class="fa fa-trash-alt"></i>
             </q-btn>
@@ -231,7 +229,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.name"
+                    v-model="device.name"
                     label-slot
                     hint="Nome - necessário pelo menos 2 caracteres"
                     lazy-rules
@@ -264,7 +262,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.description"
+                    v-model="device.description"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable
@@ -295,7 +293,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.imageUrl"
+                    v-model="device.imageUrl"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable
@@ -324,20 +322,18 @@
                 </div>
                 <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
                   <q-select
-                    id="article-parentId"
                     standout
                     :options="categories"
-                    v-model="article.categoryId"
+                    v-model="device.categoryId"
                     map-options
                     emit-value
                   />
                 </div>
                 <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
                   <q-select
-                    id="category-parentId"
                     standout
                     :options="users"
-                    v-model="article.userId"
+                    v-model="device.userId"
                     map-options
                     emit-value
                   />
@@ -346,19 +342,18 @@
               <!-- :editor-toolbar="customToolbar" -->
               <!-- :editorOptions="editorSettings" ref="editor"-->
               <!-- :editorOptions="editorSettings"
-                v-model="article.content"
+                v-model="device.content"
                 @focus="onEditorFocus"
                 @blur="onEditorBlur" -->
-              <!-- {{article}} -->
+              <!-- {{device}} -->
               <!-- @selection-change="onSelectionChange" -->
-              <!-- {{article}} -->
+              <!-- {{device}} -->
               <!-- <button @click="setEditorContent">Set Editor Content</button> -->
               <!-- @selection-change="onSelectionChange"
                 @blur="onEditorBlur" -->
               <!-- @focus="onEditorFocus" -->
               <vue-editor
-                id="editor"
-                v-model="article.content"
+                v-model="device.content"
                 placeholder="Informe o Conteúdo do Artigo..."
               />
               <div class="row">
@@ -421,8 +416,8 @@ export default {
   data: function () {
     return {
       showForm: false,
-      article: {},
-      articles: [],
+      device: {},
+      devices: [],
       categories: [],
       users: [],
       defaultCodeEditor: 0
@@ -459,24 +454,24 @@ export default {
   methods: {
     // onEditorBlur(quill) {
     //   console.log("editor blur!", quill);
-    //   // this.article.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
+    //   // this.device.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
     //   this.showLoading()
     // },
 
     // onEditorFocus(quill) {
     //   this.defaultCodeEditor ++
-    //   // console.log(this.article.content)
+    //   // console.log(this.device.content)
     //   // console.log(this.defaultCodeEditor)
-    //   if (this.defaultCodeEditor === 1 && !this.article.content !== null) {
+    //   if (this.defaultCodeEditor === 1 && !this.device.content !== null) {
     //     // console.log("editor focus!", quill);
-    //     this.article.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
+    //     this.device.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
     //     // this.showLoading()
     //   }
     // },
 
     // onSelectionChange(range) {
     //   console.log("selection change!", range);
-    //   // this.article.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
+    //   // this.device.content = "<pre class=\"ql-syntax\" spellcheck=\"false\">\n</pre>"
     //   this.showLoading()
     // },
     // showLoading () {
@@ -515,20 +510,20 @@ export default {
       }).onDismiss(() => {
       })
     },
-    loadArticles () {
-      const url = `${baseApiUrl}/articles?page=${this.page}`
+    loadDevices () {
+      const url = `${baseApiUrl}/devices?page=${this.page}`
       axios.get(url).then(res => {
-        this.articles = res.data
+        this.devices = res.data
       })
     },
     reset () {
-      this.article = {}
-      // this.loadArticles()
+      this.device = {}
+      // this.loaddevices()
     },
     save (val) {
-      const method = this.article.id ? 'put' : 'post'
-      const id = this.article.id ? `/${this.article.id}` : ''
-      axios[method](`${baseApiUrl}/articles${id}`, this.article)
+      const method = this.device.id ? 'put' : 'post'
+      const id = this.device.id ? `/${this.device.id}` : ''
+      axios[method](`${baseApiUrl}/devices${id}`, this.device)
         .then(() => {
           this.$toasted.global.defaultSuccess()
           // this.showLoading()
@@ -539,17 +534,17 @@ export default {
         .catch(showError)
     },
     remove () {
-      const id = this.article.id
-      axios.delete(`${baseApiUrl}/articles/${id}`)
+      const id = this.device.id
+      axios.delete(`${baseApiUrl}/devices/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess()
           this.reset()
         })
         .catch(showError)
     },
-    loadArticle (article) {
-      axios.get(`${baseApiUrl}/articles/${article.id}`)
-        .then(res => this.article = res.data)
+    loadDevice (device) {
+      axios.get(`${baseApiUrl}/devices/${device.id}`)
+        .then(res => this.device = res.data)
     },
     loadCategories () {
       const url = `${baseApiUrl}/categories`
@@ -570,13 +565,13 @@ export default {
   },
   watch: {
     page () {
-      this.loadArticles()
+      this.loadDevices()
     }
   },
   mounted () {
     this.loadUsers()
     this.loadCategories()
-    this.loadArticles()
+    this.loadDevices()
   }
   // beforeDestroy () {
   //   if (this.timer !== void 0) {
@@ -586,10 +581,3 @@ export default {
   // }
 }
 </script>
-
-<style lang="css">
-/* @import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
-@import "~vue2-editor/dist/vue2-editor.css"; */
-</style>

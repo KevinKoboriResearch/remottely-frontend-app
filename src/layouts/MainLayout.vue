@@ -1,8 +1,8 @@
 <template>
   <q-layout
     class="selectDisable"
-    :view="user ? 'lHh LpR lFf' : 'hHh LpR lff'"
-    :style="$q.dark.isActive ? 'background: white;' : 'background: black;'"
+    :view="user ? 'lHr LpR lFf' : 'hHh LpR lff'"
+    :style="$q.dark.isActive ? 'background: black;' : ''"
   >
     <!-- :style="$q.dark.isActive ? 'background:linear-gradient( 180deg, #212121 0%, #00ff99 100%)' : 'background:linear-gradient( 180deg, #00ff99 0%, #212121 100%)'" -->
     <!-- :style="$q.dark.isActive ? 'background:white' : 'background:black'" -->
@@ -23,12 +23,12 @@
           icon="menu"
           @click="left = !left"
         >
-          <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip>
+          <!-- <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip> -->
         </q-btn>
 
         <q-space />
 
-        <div @click="!user ? $router.push('/') : $q.dark.toggle()">
+        <div @click="!user ? $router.push('/') : $router.push('/dashboard')">
           <img
             style="margin-top: 8px;"
             class="q-px-sm"
@@ -75,7 +75,27 @@
         >
           <q-tooltip v-if="$q.screen.gt.xs">config</q-tooltip>
         </q-btn> -->
-
+        <!-- <q-btn
+          v-if="user"
+          square
+          dense
+          flat
+          icon="menu"
+          @click="right = !right"
+        >
+          <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip>
+        </q-btn> -->
+        <q-btn
+          v-if="user"
+          round
+          padding="none"
+          class="q-pa-xs q-mr-sm"
+          icon="fa fa-adjust"
+          size="sm"
+          flat
+          dense
+          @click="$q.dark.toggle()"
+        />
       </q-toolbar>
 
       <q-tabs
@@ -114,19 +134,17 @@
       :show-if-above="$route.fullPath != '/auth'"
       v-model="left"
       side="left"
-      bordered
       content-class="bg-white"
     >
       <!-- <LeftDrawer v-if="!user" /> -->
-      <!-- <LeftDrawerUser v-if="!user.admin" />
-      <LeftDrawerAdmin v-else /> -->
+      <LeftDrawerUser v-if="!user.admin" />
+      <LeftDrawerAdmin v-else />
     </q-drawer>
 
     <q-drawer
       v-if="user"
       v-model="right"
       side="right"
-      bordered
       content-class="bg-white"
     >
       <RightDrawer v-if="user" />
@@ -154,7 +172,7 @@
         <q-space v-if="$q.screen.gt.xs" />
         <q-route-tab
           label="Vinculos"
-          to="/dashboard"
+          to="/connections"
         />
         <q-route-tab
           label="Dashboard"
@@ -167,8 +185,12 @@
         </q-route-tab>
         </a> -->
         <q-route-tab
-          label="Artigos"
-          to="/user/articles"
+          label="Devices"
+          to="/user/devices"
+        />
+        <q-route-tab
+          label="perfil"
+          to="/user/profile"
         />
       </q-tabs>
       <!-- <q-tabs

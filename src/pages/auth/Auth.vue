@@ -30,8 +30,9 @@
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
         <q-card-section>
+          <!-- style="background-color: #00ff99" -->
           <q-avatar
-            style="background-color: #00ff99"
+            color="primary"
             size="90px"
             class="absolute-center shadow-10"
           >
@@ -108,8 +109,9 @@
               align="center"
             >Já tem cadastro?
               <!-- class="text-" -->
+              <!-- style="color: #00ff99;" -->
               <a
-                style="color: #00ff99;"
+                class="text-primary"
                 href
                 @click.prevent="showSignup = !showSignup"
               >
@@ -126,8 +128,9 @@
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
         <q-card-section>
+          <!-- style="background-color: #00ff99" -->
           <q-avatar
-            style="background-color: #00ff99"
+            color="primary"
             size="90px"
             class="absolute-center shadow-10"
           >
@@ -181,8 +184,9 @@
               vertical
               align="center"
             >Não tem cadastro?
+              <!-- style="color: #00ff99;" -->
               <a
-                style="color: #00ff99;"
+                class="text-primary"
                 href
                 @click.prevent="showSignup=!showSignup"
               >

@@ -24,7 +24,6 @@
         </template>
       </q-input> -->
       <q-input
-        v-if="!showForm"
         placeholder="pesquisar..."
         dense
         class="col-12 bg-pink"
@@ -102,7 +101,7 @@
           padding="none"
           icon="fas fa-sticky-note"
           class="q-ml-sm text-primary"
-          @click.stop="onNodeArticles(node)"
+          @click.stop="onNodeDevices(node)"
         />
       </div>
     </Tree>
@@ -174,13 +173,13 @@ export default {
     },
     onNodeSelect (node) {
       this.$router.push({
-        name: 'articlesByCategory',
+        name: 'devicesByCategory',
         params: { id: JSON.parse(node.id) }
       })
     },
-    onNodeArticles (node) {
+    onNodeDevices (node) {
       this.$router.push({
-        name: 'userArticlesByCategory',
+        name: 'userDevicesByCategory',
         params: { id: JSON.parse(node.id) }
       })
     },

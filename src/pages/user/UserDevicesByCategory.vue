@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- {{article}}
-    {{articles}} -->
+    <!-- {{device}}
+    {{devices}} -->
     <q-form
       v-show="showForm"
       class="q-gutter-md"
@@ -11,7 +11,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.name"
+            v-model="device.name"
             label-slot
             hint="Nome - necessário pelo menos 2 caracteres"
             lazy-rules
@@ -44,7 +44,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.description"
+            v-model="device.description"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -75,7 +75,7 @@
           <q-input
             standout
             color="white"
-            v-model="article.imageUrl"
+            v-model="device.imageUrl"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -104,19 +104,19 @@
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
           <q-select
-            id="article-parentId"
+            id="device-parentId"
             standout
             :options="categories"
-            v-model="article.categoryId"
+            v-model="device.categoryId"
             map-options
             emit-value
           />
         </div>
         <!-- user: {{user}}
         <br>
-        article: {{article}}
+        device: {{device}}
         <br>
-        articles: {{articles}}
+        devices: {{devices}}
         <br>
         categories: {{categories}} -->
         <!-- <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
@@ -124,14 +124,14 @@
             id="category-parentId"
             standout
             :options="users"
-            v-model="article.userId"
+            v-model="device.userId"
             map-options
             emit-value
           />
         </div> -->
       </div>
       <VueEditor
-        v-model="article.content"
+        v-model="device.content"
         placeholder="Informe o Conteúdo do Artigo..."
       />
       <div class="row">
@@ -163,7 +163,7 @@
     </q-form>
     <q-table
       v-show="!showForm"
-      :data="articles"
+      :data="devices"
       row-key="name"
       style="min-witdh: 100%;"
     >
@@ -174,7 +174,7 @@
               flat
               class="bg-green q-mr-sm"
               @click="reset(),
-              article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
+              device.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
               showForm = !showForm"
             >
               <i class="fa fa-user-plus"></i>
@@ -197,14 +197,14 @@
             <q-btn
               class="bg-yellow q-mr-sm"
               flat
-              @click="getArticle(props.row), props.expand = !props.expand"
+              @click="getDevice(props.row), props.expand = !props.expand"
             >
               <i class="fa fa-user-edit"></i>
             </q-btn>
             <q-btn
               class="bg-red"
               flat
-              @click="getArticle(props.row), confirmDelete()"
+              @click="getDevice(props.row), confirmDelete()"
             >
               <i class="fa fa-trash-alt"></i>
             </q-btn>
@@ -232,7 +232,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.name"
+                    v-model="device.name"
                     label-slot
                     hint="Nome - necessário pelo menos 2 caracteres"
                     lazy-rules
@@ -265,7 +265,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.description"
+                    v-model="device.description"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable
@@ -296,7 +296,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="article.imageUrl"
+                    v-model="device.imageUrl"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable
@@ -325,10 +325,10 @@
                 </div>
                 <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
                   <q-select
-                    id="article-parentId"
+                    id="device-parentId"
                     standout
                     :options="categories"
-                    v-model="article.categoryId"
+                    v-model="device.categoryId"
                     map-options
                     emit-value
                   />
@@ -336,7 +336,7 @@
               </div>
               <vue-editor
                 id="editor"
-                v-model="article.content"
+                v-model="device.content"
                 placeholder="Informe o Conteúdo do Artigo..."
               />
               <div class="row">
@@ -380,13 +380,13 @@ import { QSpinnerGears } from 'quasar'
 import { VueEditor } from "vue2-editor"
 
 export default {
-  name: 'UserArticlesByCategory',
+  name: 'UserDevicesByCategory',
   components: { VueEditor },
   data: function () {
     return {
       showForm: false,
-      article: {},
-      articles: [],
+      device: {},
+      devices: [],
       category: {},
       categories: [],
       user: {},
@@ -408,21 +408,21 @@ export default {
       })
     },
     reset () {
-      this.article = {}
+      this.device = {}
     },
     save (val) {
-      this.article.userId = this.user.id
-      const method = this.article.id ? 'put' : 'post'
-      const id = this.article.id ? `/${this.article.id}` : ''
-      axios[method](`${baseApiUrl}/articles${id}`, this.article)
+      this.device.userId = this.user.id
+      const method = this.device.id ? 'put' : 'post'
+      const id = this.device.id ? `/${this.device.id}` : ''
+      axios[method](`${baseApiUrl}/devices${id}`, this.device)
         .then(() => {
           this.$toasted.global.defaultSuccess()
         })
         .catch(showError)
     },
     remove () {
-      const id = this.article.id
-      axios.delete(`${baseApiUrl}/articles/${id}`)
+      const id = this.device.id
+      axios.delete(`${baseApiUrl}/devices/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess()
           this.reset()
@@ -433,32 +433,26 @@ export default {
       const url = `${baseApiUrl}/categories/${this.category.id}`
       axios(url).then(res => this.category = res.data)
     },
-    getArticlesByCategory () {
-      const url = `${baseApiUrl}/categories/${this.category.id}/articles`
+    getDevicesByCategory () {
+      const url = `${baseApiUrl}/categories/${this.category.id}/devices`
       axios(url).then(res => {
-        this.articles = res.data
-        // .map(article => {
-        //   return { id: article.id, name: article.name, : article.id }
+        this.devices = res.data
+        // .map(device => {
+        //   return { id: device.id, name: device.name, : device.id }
         // })
         //  this.categories = res.data.map(category => {
         //   return { ...category, label: category.path, value: category.id }
         // })
-        //this.articles.concat(res.data)
+        //this.devices.concat(res.data)
         // this.page++
 
         // if (res.data.length === 0) this.loadMore = false
       })
     },
-    getArticle (article) {
-      axios.get(`${baseApiUrl}/articles/${article.id}`)
-        .then(res => this.article = res.data)
+    getDevice (device) {
+      axios.get(`${baseApiUrl}/devices/${device.id}`)
+        .then(res => this.device = res.data)
     },
-    // getArticles () {
-    //   const url = `${baseApiUrl}/user/${this.user.id}/articles`
-    //   axios.get(url).then(res => {
-    //     this.articles = res.data
-    //   })
-    // },
     loadCategories () {
       const url = `${baseApiUrl}/user/${this.user.id}/categories`
       axios.get(url).then(res => {
@@ -475,30 +469,30 @@ export default {
   watch: {
     $route (to) {
       this.category.id = to.params.id
-      this.articles = []
+      this.devices = []
       // this.page = 1
       // this.loadMore = true
 
       this.getCategory()
-      this.getArticlesByCategory()
+      this.getDevicesByCategory()
     }
   },
   mounted () {
     this.category.id = this.$route.params.id
     this.loadUser()
     this.getCategory()
-    this.getArticlesByCategory()
+    this.getDevicesByCategory()
   }
   // watch: {
   //   page () {
-  //     this.getArticles()
+  //     this.getDevices()
   //   }
   // },
   // mounted () {
   //   this.loadUser()
   //   // this.loadUsers()
   //   this.loadCategories()
-  //   this.getArticles()
+  //   this.getDevices()
   // }
   // beforeDestroy () {
   //   if (this.timer !== void 0) {

@@ -2,31 +2,31 @@
   <q-card class="q-mb-md">
     <q-card-section horizontal>
       <q-img
-        v-if="article.imageUrl"
+        v-if="device.image"
         class="col-5"
-        :src="article.imageUrl"
+        :src="device.image"
         style="min-height: 150px;"
-        alt="Article"
+        alt="Device"
       />
       <q-img
         v-else
         class="col-5"
         :src="require('../../assets/article/1.gif')"
-        alt="Article"
+        alt="Device"
       />
       <q-card-section class="q-pt-xs">
-        <div class="text-overline text-orange">{{ article.categoryName }}
+        <div class="text-overline text-orange">{{ device.categoryName }}
         </div>
         <div class="text-h6 q-mt-sm q-mb-xs">
-          <!-- {{article.name}} -->
-          {{ $mq === 'xs' ? (article.name.length > 17 ? article.name.substring(0,15) + '...' : article.name) : $mq === 'sm' ?
-            (article.name.length > 13 ? article.name.substring(0,11) + '...' : article.name) : (article.name.length > 15 ? article.name.substring(0,13) + '...' : article.name)}}
+          {{device.name}}
+          <!-- {{ $mq === 'xs' ? (device.name.length > 17 ? device.name.substring(0,15) + '...' : device.name) : $mq === 'sm' ?
+            (device.name.length > 13 ? device.name.substring(0,11) + '...' : device.name) : (device.name.length > 15 ? device.name.substring(0,13) + '...' : device.name)}} -->
         </div>
         <div class="text-caption text-grey">
-          <!-- {{article.description}} -->
-          {{ $mq === 'xs' ? (article.description.length > 28 ? article.description.substring(0,26) + '...' : article.description)
-            : $mq === 'sm' ? article.description.substring(0,50)
-            : article.description.substring(0,80)}}
+          {{device.description}}
+          <!-- {{ $mq === 'xs' ? (device.description.length > 28 ? device.description.substring(0,26) + '...' : device.description)
+            : $mq === 'sm' ? device.description.substring(0,50)
+            : device.description.substring(0,80)}} -->
         </div>
       </q-card-section>
     </q-card-section>
@@ -35,18 +35,19 @@
 
     <q-card-actions>
       <q-btn
-        flat
-        :to="{ name: 'articleById', params: { id: article.id } }"
+        color="primary"
+        class="text-black q-mr-md"
+        :to="{ name: 'deviceById', params: { id: device.id } }"
       >
-        Ler Artigo
+        Editar
       </q-btn>
-      <q-btn
+      <!-- <q-btn
         flat
         color="primary"
-        @click.stop="onNodeArticles()"
+        @click.stop="onNodeDevices()"
       >
         editar
-      </q-btn>
+      </q-btn> -->
       <Lock />
       <!-- <q-btn
         flat
@@ -63,8 +64,8 @@
 import Lock from './Lock'
 
 export default {
-  name: 'ArticleItem',
-  props: ['article'],
+  name: 'DeviceItem',
+  props: ['device'],
   // filters: {
   //   abrirFechar (val) {
   //     if (val == false) {
@@ -82,10 +83,10 @@ export default {
     }
   },
   methods: {
-    onNodeArticles (id) {
+    onNodeDevices (id) {
       this.$router.push({
-        name: 'userArticlesByCategory',
-        params: { id: JSON.parse(this.article.categoryId) }
+        name: 'userDevicesByCategory',
+        params: { id: JSON.parse(this.device.categoryId) }
       })
     }
   }
@@ -93,7 +94,7 @@ export default {
 </script>
 
 <style>
-.article-item {
+.device-item {
   border-radius: 8px;
   margin-bottom: 20px;
   background-color: #fff;
@@ -102,34 +103,34 @@ export default {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }
 
-.article-item a {
+.device-item a {
   display: flex;
   align-items: flex-start;
   text-decoration: none;
   color: #000;
 }
 
-.article-item-info h2 {
+.device-item-info h2 {
   font-size: 1.7rem;
 }
 
-.article-item-image {
+.device-item-image {
   padding-right: 20px;
   margin-right: 20px;
   border-right: 1px solid #aaa;
 }
 
-.article-item-image img {
+.device-item-image img {
   border-radius: 5px;
 }
 
-.article-item-info {
+.device-item-info {
   display: flex;
   align-self: stretch;
   flex-direction: column;
 }
 
-.article-item-info p {
+.device-item-info p {
   flex: 1;
   color: #555;
   font-size: 1.1rem;

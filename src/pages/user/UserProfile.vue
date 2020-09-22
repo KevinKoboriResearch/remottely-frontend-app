@@ -148,7 +148,7 @@
             input-class="text-left"
             style="width: 100%;"
           >
-            <template v-slot:append>
+            <!-- <template v-slot:append>
               <q-icon
                 v-if="treeFilter === ''"
                 name="search"
@@ -159,7 +159,7 @@
                 class="cursor-pointer"
                 @click="treeFilter = ''"
               />
-            </template>
+            </template> -->
           </q-input>
         </div>
         <div class="row justify-center bg-teal-8 text-white q-ma-xs rounded-borders">
@@ -172,7 +172,7 @@
             input-class="text-left"
             style="width: 100%;"
           >
-            <template v-slot:append>
+            <!-- <template v-slot:append>
               <q-icon
                 v-if="treeFilter === ''"
                 name="search"
@@ -183,7 +183,7 @@
                 class="cursor-pointer"
                 @click="treeFilter = ''"
               />
-            </template>
+            </template> -->
           </q-input>
         </div>
         <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore. -->
@@ -209,7 +209,7 @@
     <q-table
       separator="cell"
       v-show="!showForm"
-      :data="articles"
+      :data="devices"
       row-key="name"
       style="min-witdh: 100%;"
       class="q-mt-xs"
@@ -218,7 +218,7 @@
     >
       <template v-slot:top="props">
         <div class="q-ml-xs text-h6">
-          Articles1
+          Devices1
         </div>
         <q-btn
           v-if="!props.inFullscreen"
@@ -248,7 +248,7 @@
           flat
           dense
           @click="reset(),
-          article.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
+          device.content = `<pre class=\'ql-syntax\' spellcheck=\'false\'>\nDigite aqui dentro o seu código fonte...</pre>`,
           showForm = !showForm"
         />
         <q-btn
@@ -272,7 +272,7 @@
         />
       </template><template v-slot:top="props">
         <div class="q-ml-xs text-h6">
-          Articles1
+          Devices1
         </div>
         <q-space />
         <q-btn
@@ -283,7 +283,7 @@
           size="sm"
           flat
           dense
-          to="/user/articles"
+          to="/user/devices"
           @click="$store.commit('rightDrawer/toggleMenu', val)"
         />
         <q-btn
@@ -381,11 +381,11 @@
 import { baseApiUrl, showError, userKey } from '../../global'
 import axios from 'axios'
 import { QSpinnerGears } from 'quasar'
-import { VueEditor } from "vue2-editor"
+// import { VueEditor } from "vue2-editor"
 
 export default {
   name: 'UserProfile',
-  components: { VueEditor },
+  // components: { VueEditor },
   data () {
     return {
       pagination: {
@@ -395,8 +395,8 @@ export default {
       },
       baseApiUrl: baseApiUrl,
       showForm: false,
-      article: {},
-      articles: [],
+      device: {},
+      devices: [],
       categories: [],
       toolbar: false,
       perfilPhoto: false,
@@ -407,7 +407,7 @@ export default {
   },
   computed: {
     pagesNumber () {
-      return Math.ceil(this.articles.length / this.pagination.rowsPerPage)
+      return Math.ceil(this.devices.length / this.pagination.rowsPerPage)
     },
     right: {
       get () {
@@ -461,7 +461,7 @@ export default {
       // console.log(file.path)
       // console.log(file.size)
       // console.log(file.lastModified)
-      // // this.article.userId = this.user.id
+      // // this.device.userId = this.user.id
       const fd = new FormData()
       fd.append('image', file, file.name)
       axios.post(`baseApiUrl/user/${this.user.id}/upload-image`, fd)
@@ -490,27 +490,27 @@ export default {
       }).onDismiss(() => {
       })
     },
-    loadArticles () {
-      const url = `${baseApiUrl}/user/${this.user.id}/articles`
+    loadDevices () {
+      const url = `${baseApiUrl}/user/${this.user.id}/devices`
       axios.get(url)
         // .then(res => {
-        //   this.articles = res.data
+        //   this.devices = res.data
         // })
         .then(res => {
-          this.articles = res.data.map(article => {
-            return { name: article.name, description: article.description }
+          this.devices = res.data.map(device => {
+            return { name: device.name, description: device.description }
           })
         })
     },
     reset () {
-      this.article = {}
-      this.loadArticles()
+      this.device = {}
+      this.loadDevices()
     },
     save () {
-      this.article.userId = this.user.id
-      const method = this.article.id ? 'put' : 'post'
-      const id = this.article.id ? `/${this.article.id}` : ''
-      axios[method](`${baseApiUrl}/articles${id}`, this.article)
+      this.device.userId = this.user.id
+      const method = this.device.id ? 'put' : 'post'
+      const id = this.device.id ? `/${this.device.id}` : ''
+      axios[method](`${baseApiUrl}/devices${id}`, this.device)
         .then(() => {
           this.$toasted.global.defaultSuccess()
         })
@@ -526,9 +526,9 @@ export default {
         })
         .catch(showError)
     },
-    loadArticle (article) {
-      axios.get(`${baseApiUrl}/articles/${article.id}`)
-        .then(res => this.article = res.data)
+    loadDevice (device) {
+      axios.get(`${baseApiUrl}/devices/${device.id}`)
+        .then(res => this.device = res.data)
     },
     loadCategories () {
       const url = `${baseApiUrl}/categories`
@@ -571,13 +571,13 @@ export default {
   },
   watch: {
     page () {
-      this.loadArticles()
+      this.loadDevices()
     }
   },
   mounted () {
     this.loadUser()
     this.loadCategories()
-    this.loadArticles(this.user)
+    this.loadDevices(this.user)
   }
 }
 </script>

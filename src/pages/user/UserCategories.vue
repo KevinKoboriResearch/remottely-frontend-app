@@ -270,10 +270,8 @@ export default {
     loadCategories () {
       // const json = localStorage.getItem(userKey)
       // const user = JSON.parse(json)
-      // `user/${user.id}/articles`
       const url = `${baseApiUrl}/user/${this.user.id}/categories`
       // const id = this.user.id
-      // const url = `${baseApiUrl}/user/${id}/articles`
       axios.get(url).then(res => {
         // this.categories = res.data
         this.tableCategories = res.data.map(category => {
@@ -314,11 +312,6 @@ export default {
     loadCategory (category) {
       this.category = { ...category }
     },
-    // loadArticle (article) {
-    //   // `user/${user.id}/article/${article.id}`
-    //   axios.get(`${baseApiUrl}/articles/${article.id}`)
-    //     .then(res => this.article = res.data)
-    // },
     loadUser () {
       const json = localStorage.getItem(userKey)
       this.user = JSON.parse(json)
