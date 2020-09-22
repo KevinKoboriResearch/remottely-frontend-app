@@ -8,7 +8,7 @@ import UserArticlesByCategory from '../pages/user/UserArticlesByCategory'
 import UserCategories from '../pages/user/UserCategories'
 import AdminPages from '../pages/admin/AdminPages'
 import ArticlesByCategory from '../pages/article/ArticlesByCategory'
-import AllArticles from '../pages/article/AllArticles'
+// import AllArticles from '../pages/article/AllArticles'
 import ArticleById from '../pages/article/ArticleById'
 import Auth from '../pages/auth/Auth'
 import Error404 from '../pages/Error404'
@@ -50,7 +50,7 @@ const routes = [
       //free routes
       { name: 'articlesByCategory', path: 'categories/:id/articles', component: ArticlesByCategory },
       // { name: 'allCategories', path: 'categories', component: AllCategories },
-      { name: 'allArticles', path: 'articles', component: AllArticles },
+      // { name: 'allArticles', path: 'articles', component: AllArticles },
       { name: 'articleById', path: 'articles/:id', component: ArticleById },
       { name: 'auth', path: 'auth', component: Auth },
       { name: 'error', path: '*', component: Error404 }

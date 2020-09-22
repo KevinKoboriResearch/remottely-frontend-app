@@ -2,6 +2,29 @@
   <div>
     <q-toolbar class="q-pa-sm">
       <q-input
+        v-if="!showForm"
+        placeholder="pesquisar..."
+        dense
+        class="col-12 bg-pink"
+        style="witdh: 100%;border-radius: 5px;"
+        standout
+        v-model="treeFilter"
+        input-class="text-right"
+      >
+        <template v-slot:append>
+          <q-icon
+            v-if="treeFilter === ''"
+            name="search"
+          />
+          <q-icon
+            v-else
+            name="clear"
+            class="cursor-pointer"
+            @click="treeFilter = ''"
+          />
+        </template>
+      </q-input>
+      <!-- <q-input
         square
         dense
         standout
@@ -22,7 +45,7 @@
             @click="treeFilter = ''"
           />
         </template>
-      </q-input>
+      </q-input> -->
     </q-toolbar>
     <q-btn
       dense

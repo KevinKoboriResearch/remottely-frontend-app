@@ -7,18 +7,6 @@
             {{ sub }}
           </div>
         </q-toolbar-title>
-        <q-space />
-        <q-btn
-          class="q-mr-md"
-          label="Mcdonalds.com"
-          type="a"
-          href="http://localhost:8081/#/"
-        >
-        </q-btn>
-        <q-btn
-          label="Todos os Artigos"
-          to="/articles"
-        />
       </q-toolbar>
     </div>
     <div class="text-h3 q-mt-sm">

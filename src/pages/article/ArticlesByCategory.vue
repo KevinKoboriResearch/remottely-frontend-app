@@ -5,6 +5,13 @@
       :main="category.name"
       sub="Categoria"
     />
+    <q-btn
+      flat
+      color="primary"
+      @click.stop="onNodeArticles()"
+    >
+      Editar Categoria
+    </q-btn>
     <q-card class="bg-transparent no-shadow no-border q-pa-md">
       <q-card-section class="q-pa-none">
         <div class="row q-col-gutter-sm">
@@ -167,6 +174,14 @@ export default {
     }
   },
   methods: {
+    onNodeArticles (id) {
+      if (this.articles.length >= 0) {
+        this.$router.push({
+          name: 'userArticlesByCategory',
+          params: { id: JSON.parse(this.articles[0].categoryId) }
+        })
+      }
+    },
     getCategory () {
       const url = `${baseApiUrl}/categories/${this.category.id}`
       axios(url).then(res => this.category = res.data)

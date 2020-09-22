@@ -1,9 +1,9 @@
 <template>
   <div class="q-pa-xs">
     <!-- {{user}} -->
-    <div class="fit row no-wrap justify-between items-start content-start">
-      <q-toolbar class="q-mb-xs bg-cyan-10 text-white shadow-2 rounded-borders">
-        <!-- <q-btn
+    <!-- <div class="fit row no-wrap justify-between items-start content-start">
+      <q-toolbar class="q-mb-xs bg-primary text-black shadow-2 rounded-borders">
+        <q-btn
           label="Fechar"
           padding="none"
           class="q-pa-xs q-mr-sm"
@@ -11,7 +11,7 @@
           flat
           dense
           @click.prevent="right = !right"
-        /> -->
+        />
         <q-space />
         <q-btn
           round
@@ -33,10 +33,13 @@
           :icon="$q.fullscreen.isActive  ? 'fas fa-compress' : 'fas fa-expand'"
         />
       </q-toolbar>
-    </div>
+    </div> -->
     <q-card class="my-card">
       <q-item>
-        <q-item-section avatar>
+        <q-item-section
+          class="q-pt-xs"
+          avatar
+        >
           <q-btn
             @click="perfilPhoto = true"
             round
@@ -50,7 +53,7 @@
         <q-item-section>
           <!-- <q-item-label>{{user.name}}</q-item-label>
           <q-item-label caption>Admin: {{user.admin ? 'sim' : 'não'}}</q-item-label> -->
-          <div class="text-h6">Nome: {{user.name}}</div>
+          <div class="text-h6">{{user.name}}</div>
           <div class="text-subtitle2">Admin: {{user.admin ? 'sim' : 'não'}}</div>
         </q-item-section>
       </q-item>
@@ -63,7 +66,8 @@
       <q-card-actions vertical>
         <q-btn
           label="Editar"
-          color="cyan-10"
+          class="text-black"
+          color="primary"
           @click="toolbar = true"
         />
         <q-btn
@@ -387,7 +391,7 @@ export default {
       pagination: {
         sortBy: 'desc',
         descending: false,
-        rowsPerPage: 8
+        rowsPerPage: 6
       },
       baseApiUrl: baseApiUrl,
       showForm: false,

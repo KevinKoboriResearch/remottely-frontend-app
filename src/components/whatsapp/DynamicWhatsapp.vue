@@ -11,12 +11,14 @@
         :disable="draggingFab"
         class="shadow-0 text-white"
         padding="none"
-        style="background-color:#000000; border-top-left-radius: 50px; border-top-right-radius: 50px;
+        style="background-color:#000000bb; border-top-left-radius: 50px; border-top-right-radius: 50px;
         border-bottom-left-radius: 0px; border-bottom-right-radius: 50px;"
       >
+        <!-- color="light-green-14" -->
+        <!-- color="primary" -->
         <q-icon
           name="mdi-whatsapp"
-          color="light-green-14"
+          style="color: #00ff99;"
           size="50px"
         />
       </q-btn>

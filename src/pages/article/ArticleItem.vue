@@ -47,30 +47,34 @@
       >
         editar
       </q-btn>
-      <q-btn
+      <Lock />
+      <!-- <q-btn
         flat
         color="primary"
         @click.stop="estado = !estado"
       >
         {{ estado | abrirFechar}}
-      </q-btn>
+      </q-btn> -->
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
+import Lock from './Lock'
+
 export default {
   name: 'ArticleItem',
   props: ['article'],
-  filters: {
-    abrirFechar (val) {
-      if (val == false) {
-        return 'fechado'
-      } else {
-        return 'aberto'
-      }
-    }
-  },
+  // filters: {
+  //   abrirFechar (val) {
+  //     if (val == false) {
+  //       return 'fechado'
+  //     } else {
+  //       return 'aberto'
+  //     }
+  //   }
+  // },
+  components: { Lock },
   data () {
     return {
       estado: false,

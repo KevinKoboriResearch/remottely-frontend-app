@@ -1,10 +1,13 @@
 <template>
   <q-layout
     class="selectDisable"
-    :view="user ? 'hHh LpR lFf' : 'hHh LpR lff'"
-    :style="$q.dark.isActive ? 'background:linear-gradient( 180deg, #16434d 0%, #c1f4ff 100%)' : 'background:linear-gradient( 180deg, #c1f4ff 0%, #16434d 100%)'"
+    :view="user ? 'lHh LpR lFf' : 'hHh LpR lff'"
+    :style="$q.dark.isActive ? 'background: white;' : 'background: black;'"
   >
+    <!-- :style="$q.dark.isActive ? 'background:linear-gradient( 180deg, #212121 0%, #00ff99 100%)' : 'background:linear-gradient( 180deg, #00ff99 0%, #212121 100%)'" -->
     <!-- :style="$q.dark.isActive ? 'background:white' : 'background:black'" -->
+    <!-- c1f4ff -->
+    <!-- 16434d -->
     <q-header
       v-if="!validatingToken"
       height-hint="98"
@@ -23,30 +26,33 @@
           <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip>
         </q-btn>
 
-        <!-- <q-space v-if="!user && $q.screen.lt.sm" /> -->
-        <q-space v-if="!user" />
+        <q-space />
 
-        <!-- @click="$q.dark.toggle()" -->
-        <div @click="$router.push('/')">
+        <div @click="!user ? $router.push('/') : $q.dark.toggle()">
           <img
             style="margin-top: 8px;"
             class="q-px-sm"
             src="../assets/logo/remottely.png"
             height="22"
           >
-          <!-- <q-tooltip v-if="$q.screen.gt.xs">theme</q-tooltip> -->
         </div>
 
+        <!-- <q-tooltip v-if="$q.screen.gt.xs">theme</q-tooltip> -->
         <q-space />
 
         <!-- <q-space v-if="!user && $q.screen.lt.sm" /> -->
 
         <!-- <q-space /> -->
-
-        <UserDropdown
-          v-scrollanimation
-          v-if="user && !right"
-        />
+        <!-- color="secondary" -->
+        <!-- v-if="user.admin" -->
+        <!-- <UserDropdown v-scrollanimation /> -->
+        <!-- <q-btn
+          else
+          flat
+          to="/user/profile"
+          icon-right="mdi-account"
+        /> -->
+        <!-- :label="user.name" -->
 
         <!-- <q-btn
           v-if="!user"
@@ -112,8 +118,8 @@
       content-class="bg-white"
     >
       <!-- <LeftDrawer v-if="!user" /> -->
-      <LeftDrawerUser v-if="!user.admin" />
-      <LeftDrawerAdmin v-else />
+      <!-- <LeftDrawerUser v-if="!user.admin" />
+      <LeftDrawerAdmin v-else /> -->
     </q-drawer>
 
     <q-drawer
@@ -141,28 +147,15 @@
     <whatsapp v-if="$route.fullPath != '/auth'" />
 
     <q-footer
-      v-if="!validatingToken"
+      v-if="!validatingToken && user"
       class="selectDisable bg-black text-white"
     >
-
-      <q-toolbar
-        v-scrollanimation
-        v-if="!user && $route.fullPath != '/auth'"
-      >
-        <img
-          src="../assets/logo/your.png"
-          height="25"
-          class
-        >
-        <!-- <q-toolbar-title>
-          Your
-        </q-toolbar-title> -->
-      </q-toolbar>
-      <q-tabs
-        v-scrollanimation
-        v-if="user"
-      >
+      <q-tabs v-scrollanimation>
         <q-space v-if="$q.screen.gt.xs" />
+        <q-route-tab
+          label="Vinculos"
+          to="/dashboard"
+        />
         <q-route-tab
           label="Dashboard"
           to="/dashboard"
@@ -174,23 +167,11 @@
         </q-route-tab>
         </a> -->
         <q-route-tab
-          label="Account"
-          to="/dashboard"
-        />
-        <q-route-tab
-          label="Categorias"
-          to="/articles"
-        />
-        <q-route-tab
           label="Artigos"
-          to="/articles"
+          to="/user/articles"
         />
-        <!-- <q-route-tab
-          label="Como Usar"
-          to="/tutorials"
-        /> -->
       </q-tabs>
-      <q-tabs
+      <!-- <q-tabs
         v-scrollanimation
         v-if="!user && $route.fullPath == '/auth'"
       >
@@ -207,17 +188,12 @@
           label="Serviços"
           to="/services"
         />
-        <!-- <q-route-tab
-          label="Dúvidas"
-          to="/doubts"
-        /> -->
-        <!-- icon="account" -->
         <q-route-tab
           label="Login"
           to="/auth"
         />
 
-      </q-tabs>
+      </q-tabs> -->
     </q-footer>
 
   </q-layout>

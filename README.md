@@ -76,3 +76,6 @@ css horizontal scroll bar:
 vuejs scroll:
 - https://itnext.io/make-elements-fade-in-while-scrolling-daily-vue-tip-3-6540dd975c7e
 - https://css-tricks.com/intro-to-vue-5-animations/
+
+quasar multiple select:
+- https://forum.quasar-framework.org/topic/291/q-select-with-search/9

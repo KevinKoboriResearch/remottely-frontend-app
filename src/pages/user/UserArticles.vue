@@ -148,7 +148,7 @@
         v-if="!showForm"
         placeholder="pesquisar..."
         dense
-        class="col-12 bg-pink"
+        class="col-12 bg-primary"
         style="witdh: 100%;border-radius: 5px;"
         standout
         v-model="filter"
@@ -837,12 +837,13 @@
               <img
                 v-if="props.row.imageUrl"
                 :src="props.row.imageUrl"
-                style="min-height: 150px;"
+                style="max-width: 200px;"
               >
               <q-img
                 v-else
                 class="col-5"
                 :src="require('../../assets/article/1.gif')"
+                style="max-width: 200px;"
                 alt="Article"
               />
             </q-card-section>
@@ -861,14 +862,14 @@
                 icon="edit"
                 round
                 dense
-                class="bg-pink text-white"
+                class="bg-primary text-white"
                 @click="loadArticle(props.row), props.expand = !props.expand"
               />
               <q-btn
                 icon="delete"
                 round
                 dense
-                class="bg-pink text-white"
+                class="bg-primary text-white"
                 @click="loadArticle(props.row), confirmDelete()"
               />
             </q-card-actions>
@@ -945,7 +946,7 @@ export default {
   components: { VueEditor },
   data: function () {
     return {
-      tableType: 'gridImage',
+      tableType: 'list',
       showForm: false,
       article: {},
       articles: [],
