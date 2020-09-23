@@ -1,6 +1,6 @@
 import Home from '../pages/static/home/Home'
-// import About from '../pages/static/about/About'
-// import Services from '../pages/static/services/Services'
+import About from '../pages/static/about/About'
+import Services from '../pages/static/services/Services'
 // import Doubts from '../pages/static/doubts/Doubts'
 import UserProfile from '../pages/user/UserProfile'
 import Userdevices from '../pages/user/Userdevices'
@@ -24,8 +24,8 @@ const routes = [
     children: [
       //free routes
       { name: 'home', path: '', component: Home },
-      // { name: 'about', path: 'about', component: About },
-      // { name: 'services', path: 'services', component: Services },
+      { name: 'about', path: 'about', component: About },
+      { name: 'services', path: 'services', component: Services },
       // { name: 'doubts', path: 'doubts', component: Doubts },
       //user routes
       { name: 'userProfile', path: 'user/profile', component: UserProfile },

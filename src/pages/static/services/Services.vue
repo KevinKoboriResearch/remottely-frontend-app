@@ -1,6 +1,8 @@
 <template>
   <div>
-
+    <q-card>
+      Servicos
+    </q-card>
   </div>
 </template>
 

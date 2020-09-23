@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-card>
-      sifhuasgfiuys
+      Sobre
     </q-card>
   </div>
 </template>

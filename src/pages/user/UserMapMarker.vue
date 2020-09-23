@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     initMap () {
-      var myLatLng = { lat: -25.363, lng: 131.044 };
+      var myLatLng = { lat: -2.363, lng: 1.044 };
 
       this.mapData = new google.maps.Map(document.getElementById('myMap'), {
         center: myLatLng,
