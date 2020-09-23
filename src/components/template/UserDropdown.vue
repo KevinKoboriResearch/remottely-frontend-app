@@ -14,10 +14,6 @@
       color="transparent"
       toggle-color="yellow"
     >
-      <!-- class="text-white" -->
-      <!-- mdi-triangle -->
-      <!-- <Gravatar :email="user.email" alt="User" /> -->
-      <!-- <div style="height:18px"></div> -->
       <q-list
         class="text-white q-mt-sm"
         @mouseover.native="listOver = true"
@@ -25,7 +21,7 @@
       >
         <q-item
           to="/admin"
-          v-if="user.admin"
+          v-if="user.role == 'adminApp'"
         >
           <q-item-section>
             <q-item-label>Admin Pages</q-item-label>

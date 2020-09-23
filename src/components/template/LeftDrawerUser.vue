@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{category}}
     <q-toolbar class="q-pa-sm">
       <!-- <q-input
         square
@@ -76,7 +77,7 @@
           class="q-ml-sm text-primary"
           @click.stop="editNode(node)"
         />
-        <!-- <q-btn
+        <q-btn
           flat
           dense
           size="10px"
@@ -93,7 +94,7 @@
           icon="fas fa-plus-square"
           class="q-ml-sm text-primary"
           @click.stop="addChildNode(node)"
-        /> -->
+        />
         <q-btn
           flat
           dense
@@ -154,7 +155,7 @@ export default {
       axios.delete(`${baseApiUrl}/categories/${node.id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess()
-          this.forceRerenderTree()
+          // this.forceRerenderTree()
           location.reload()
         })
         .catch(showError)
@@ -201,7 +202,8 @@ export default {
       axios[method](`${baseApiUrl}/categories${id}`, this.category)
         .then(() => {
           this.$toasted.global.defaultSuccess()
-          this.forceRerenderTree()
+          // this.forceRerenderTree()
+          location.reload()
         })
         .catch(showError)
     },
@@ -221,6 +223,7 @@ export default {
       axios.post(`${baseApiUrl}/categories`, this.category)
         .then(() => {
           this.$toasted.global.defaultSuccess()
+          // location.reload()
         })
         .catch(showError)
 

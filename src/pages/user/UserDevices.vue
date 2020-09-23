@@ -19,20 +19,10 @@
               <div class="row items-center all-pointer-events">
                 <q-icon
                   class="q-mr-xs"
-                  color="deep-orange"
+                  color="primary"
                   size="24px"
-                  name="fa fa-user-tie"
-                />
-                Informe o Nome do Artigo...
-
-                <q-tooltip
-                  content-class="bg-grey-8"
-                  anchor="top left"
-                  self="bottom left"
-                  :offset="[0, 8]"
-                >
-                  this will be your email login... for more info contact your teacher
-                </q-tooltip>
+                  name="fas fa-door-closed"
+                />&nbsp;&nbsp;Informe o nome fixo do dispositivo
               </div>
             </template>
           </q-input>
@@ -41,7 +31,7 @@
           <q-input
             standout
             color="white"
-            v-model="device.description"
+            v-model="device.nickname"
             label-slot
             clearable
           >
@@ -49,26 +39,16 @@
               <div class="row items-center all-pointer-events">
                 <q-icon
                   class="q-mr-xs"
-                  color="deep-orange"
+                  color="primary"
                   size="24px"
-                  name="fa fa-user-tie"
-                />
-                Informe a Descrição do Artigo...
-
-                <q-tooltip
-                  content-class="bg-grey-8"
-                  anchor="top left"
-                  self="bottom left"
-                  :offset="[0, 8]"
-                >
-                  this will be your email login... for more info contact your teacher
-                </q-tooltip>
+                  name="fas fa-door-open"
+                />&nbsp;&nbsp;Informe o nome fantasia do dispositivo
               </div>
             </template>
           </q-input>
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
-          <q-input
+          <!-- <q-input
             standout
             color="white"
             v-model="device.image"
@@ -79,23 +59,22 @@
               <div class="row items-center all-pointer-events">
                 <q-icon
                   class="q-mr-xs"
-                  color="deep-orange"
+                  color="primary"
                   size="24px"
-                  name="fa fa-user-tie"
+                  name="fas fa-file-image"
                 />
-                Informe a URL da Imagem...
-
-                <q-tooltip
-                  content-class="bg-grey-8"
-                  anchor="top left"
-                  self="bottom left"
-                  :offset="[0, 8]"
-                >
-                  this will be your email login... for more info contact your teacher
-                </q-tooltip>
+                Insira aqui uma imagem
               </div>
             </template>
-          </q-input>
+          </q-input> -->
+          <q-uploader
+            :url="baseApiUrl + '/user/' + user.id + '/upload-image'"
+            :upload-factory="uploadFile"
+            label="Carregar foto"
+            color="primary"
+            text-color="black"
+            style="min-width: 100%"
+          />
         </div>
         <div class="q-pa-sm col-xs-12 col-sm-12 col-md-6">
           <q-select
@@ -126,7 +105,7 @@
         <q-space />
         <q-btn
           @click="showForm = false"
-          label="Cancelar"
+          label="Voltar"
           type="cancel"
           color="primary"
           flat
@@ -295,20 +274,11 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
-                        />
-                        Informe o Nome do Artigo...
+                          name="fas fa-door-closed"
+                        />&nbsp;&nbsp;Informe o nome fixo do dispositivo
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -317,7 +287,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="device.description"
+                    v-model="device.nickname"
                     label-slot
                     clearable
                   >
@@ -325,20 +295,11 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
-                        />
-                        Informe a Descrição do Artigo...
+                          name="fas fa-door-open"
+                        />&nbsp;&nbsp;Informe o nome fantasia do dispositivo
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -355,20 +316,12 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
+                          name="fas fa-file-image"
                         />
                         Informe a URL da Imagem...
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -384,10 +337,6 @@
                   />
                 </div>
               </div>
-              <!-- <vue-editor
-                id="editor"
-                placeholder="Informe o Conteúdo do Artigo..."
-              /> -->
               <div class="row">
                 <q-btn
                   @click="save"
@@ -591,20 +540,11 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
-                        />
-                        Informe o Nome do Artigo...
+                          name="fas fa-door-open"
+                        />&nbsp;&nbsp;Informe o nome fixo do dispositivo
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -613,7 +553,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="device.description"
+                    v-model="device.nickname"
                     label-slot
                     clearable
                   >
@@ -621,20 +561,11 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
-                        />
-                        Informe a Descrição do Artigo...
+                          name="fas fa-door-open"
+                        />&nbsp;&nbsp;Informe o nome fantasia do dispositivo
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -651,20 +582,12 @@
                       <div class="row items-center all-pointer-events">
                         <q-icon
                           class="q-mr-xs"
-                          color="deep-orange"
+                          color="primary"
                           size="24px"
-                          name="fa fa-user-tie"
+                          name="fas fa-door-open"
                         />
                         Informe a URL da Imagem...
 
-                        <q-tooltip
-                          content-class="bg-grey-8"
-                          anchor="top left"
-                          self="bottom left"
-                          :offset="[0, 8]"
-                        >
-                          this will be your email login... for more info contact your teacher
-                        </q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -680,10 +603,6 @@
                   />
                 </div>
               </div>
-              <vue-editor
-                id="editor"
-                placeholder="Informe o Conteúdo do Artigo..."
-              />
               <div class="row">
                 <q-btn
                   @click="save"
@@ -933,21 +852,19 @@ import { baseApiUrl, showError, userKey } from '../../global'
 import axios from 'axios'
 import { QSpinnerGears } from 'quasar'
 
-// import { VueEditor } from "vue2-editor"
 import Lock from './Lock'
 export default {
   name: 'UserDevices',
-  // components: { VueEditor },
   components: { Lock },
   data: function () {
     return {
+      baseApiUrl: baseApiUrl,
       tableType: 'list',
       showForm: false,
       device: {},
       devices: [],
       categories: [],
       user: {},
-      defaultCodeEditor: 0,
       filter: '',
       show_filter: false,
       pagination: {
@@ -968,11 +885,26 @@ export default {
     // this.pagination.rowsPerPage
   },
   methods: {
+    uploadFile (file, updateProgress) {
+      // console.log(file.name)
+      // console.log(file.path)
+      // console.log(file.size)
+      // console.log(file.lastModified)
+      // // this.device.userId = this.user.id
+      const fd = new FormData()
+      fd.append('image', file, file.name)
+      axios.post(`baseApiUrl/user/${this.user.id}/upload-image`, fd)
+        .then(() => {
+          this.$toasted.global.defaultSuccess()
+          // this.user = {}
+        })
+        .catch(showError)
+    },
     confirmDelete () {
       this.$q.dialog({
         dark: true,
         title: 'Apagar',
-        message: 'Tem certeza que quer apagar este artigo?',
+        message: 'Tem certeza que deseja apagar este dispositivo?',
         cancel: true,
         persistent: true
       }).onOk(() => {

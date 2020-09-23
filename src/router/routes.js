@@ -4,8 +4,9 @@ import Home from '../pages/static/home/Home'
 // import Doubts from '../pages/static/doubts/Doubts'
 import UserProfile from '../pages/user/UserProfile'
 import Userdevices from '../pages/user/Userdevices'
-import UserdevicesByCategory from '../pages/user/UserdevicesByCategory'
+import UserDevicesByCategory from '../pages/user/UserDevicesByCategory'
 import UserCategories from '../pages/user/UserCategories'
+import UserMapMarker from '../pages/user/UserMapMarker'
 import AdminPages from '../pages/admin/AdminPages'
 import DevicesByCategory from '../pages/device/DevicesByCategory'
 import DeviceById from '../pages/device/DeviceById'
@@ -29,8 +30,9 @@ const routes = [
       //user routes
       { name: 'userProfile', path: 'user/profile', component: UserProfile },
       { name: 'userdevices', path: 'user/devices', component: Userdevices },
-      { name: 'userdevicesByCategory', path: 'user/category/:id/devices', component: UserdevicesByCategory },
+      { name: 'userDevicesByCategory', path: 'user/category/:id/devices', component: UserDevicesByCategory },
       { name: 'userCategories', path: 'user/categories', component: UserCategories },
+      { name: 'userMapMarker', path: 'user/user-map-marker', component: UserMapMarker },
       { name: 'deviceById', path: 'deviceById', component: DeviceById },
       { name: 'dashboard', path: 'dashboard', component: Dashboard },
       { name: 'connections', path: 'connections', component: Connections },

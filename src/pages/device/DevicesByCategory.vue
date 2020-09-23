@@ -5,13 +5,13 @@
       :main="category.name"
       sub="Categoria"
     />
-    <q-btn
+    <!-- <q-btn
       flat
       color="primary"
       @click.stop="onNodeDevice()"
     >
       Editar Categoria
-    </q-btn>
+    </q-btn> -->
     <q-card class="bg-transparent no-shadow no-border q-pa-md">
       <q-card-section class="q-pa-none">
         <div class="row q-col-gutter-sm">
@@ -131,7 +131,7 @@
     </q-toolbar>
     <div class="fit row wrap justify-start items-start content-start">
       <div
-        v-if="searchDevice === '' || device.name.includes(searchDevice) || device.description.includes(searchDevice)"
+        v-if="searchDevice === '' || device.name.includes(searchDevice) || device.nickname.includes(searchDevice)"
         class="q-pt-md q-px-md col-xs-12 col-sm-6 col-md-4"
         v-for="device in devices"
         :key="device.id"
@@ -174,14 +174,14 @@ export default {
     }
   },
   methods: {
-    onNodeDevice (id) {
-      if (this.devices.length >= 0) {
-        this.$router.push({
-          name: 'userDeviceByCategory',
-          params: { id: JSON.parse(this.devices[0].categoryId) }
-        })
-      }
-    },
+    // onNodeDevice (id) {
+    //   if (this.devices.length >= 0) {
+    //     this.$router.push({
+    //       name: 'userDeviceByCategory',
+    //       params: { id: JSON.parse(this.devices[0].categoryId) }
+    //     })
+    //   }
+    // },
     getCategory () {
       const url = `${baseApiUrl}/categories/${this.category.id}`
       axios(url).then(res => this.category = res.data)

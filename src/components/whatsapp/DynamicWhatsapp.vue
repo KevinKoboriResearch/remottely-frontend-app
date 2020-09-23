@@ -171,7 +171,7 @@ export default {
     shadowElevation: 'shadow-1',
     shadowVal2: false,
     shadowElevation2: 'shadow-1',
-    fabPos: [15, 15],
+    fabPos: [5, 5],
     draggingFab: false
   }),
   watch: {

@@ -16,7 +16,6 @@
             lazy-rules
             :rules="[ val => val && val.length > 0 || 'Please type something']"
           >
-            <!-- hint="Nome - necessário pelo menos 4 caracteres" -->
             <template v-slot:label>
               <div class="row items-center all-pointer-events">
                 <q-icon
@@ -26,10 +25,6 @@
                   name="fa fa-user-tie"
                 />
                 Informe o Nome do Usuário...
-
-                <!-- <q-tooltip content-class="bg-grey-8" anchor="top left" self="bottom left" :offset="[0, 8]">
-                  this will be your email login... for more info contact your teacher
-                </q-tooltip> -->
               </div>
             </template>
           </q-input>
@@ -178,7 +173,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -317,7 +312,7 @@ export default {
       const url = `${baseApiUrl}/users`
       axios.get(url).then(res => {
         this.users = res.data.map(user => {
-          return { value: user.id, label: `${user.name} - ${user.email}` }
+          return { value: user.id, label: `${user.name} - ${user.phone}` }
         })
       })
     }

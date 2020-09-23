@@ -32,7 +32,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -42,7 +42,7 @@
           <q-input
             standout
             color="white"
-            v-model="device.description"
+            v-model="device.nickname"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -63,7 +63,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -94,7 +94,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -252,7 +252,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -262,7 +262,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="device.description"
+                    v-model="device.nickname"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable
@@ -283,7 +283,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -314,7 +314,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -558,7 +558,7 @@ export default {
       const url = `${baseApiUrl}/users`
       axios.get(url).then(res => {
         this.users = res.data.map(user => {
-          return { value: user.id, label: `${user.name} - ${user.email}` }
+          return { value: user.id, label: `${user.name} - ${user.phone}` }
         })
       })
     }

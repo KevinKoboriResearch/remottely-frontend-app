@@ -54,7 +54,7 @@
           <!-- <q-item-label>{{user.name}}</q-item-label>
           <q-item-label caption>Admin: {{user.admin ? 'sim' : 'não'}}</q-item-label> -->
           <div class="text-h6">{{user.name}}</div>
-          <div class="text-subtitle2">Admin: {{user.admin ? 'sim' : 'não'}}</div>
+          <div class="text-subtitle2">Admin: {{user.role == 'adminLocal' ? 'sim' : 'não'}}</div>
         </q-item-section>
       </q-item>
       <q-card-section>
@@ -498,7 +498,7 @@ export default {
         // })
         .then(res => {
           this.devices = res.data.map(device => {
-            return { name: device.name, description: device.description }
+            return { name: device.name, nickname: device.nickname }
           })
         })
     },

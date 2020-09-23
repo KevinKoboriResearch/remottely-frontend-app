@@ -25,7 +25,7 @@
     <div class="fit row wrap justify-center items-center content-center">
       <q-card
         v-if="showSignup"
-        style="background-color: #333; position: absolute; top:19vh;"
+        style="background-color: #121212; position: absolute; top:15vh;"
         class="text-white"
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
@@ -40,6 +40,7 @@
           </q-avatar>
         </q-card-section>
         <br>
+        <br>
         <q-card-section>
           <q-form
             class="q-gutter-md"
@@ -51,11 +52,13 @@
 
             <q-input
               dense
-              v-model="user.email"
-              label="Email"
-              lazy-rules
+              v-model="user.phone"
+              prefix="+55"
+              label="Número de celular"
+              mask="(##) ##### - ####"
+              unmasked-value
               autocomplete="nope"
-              type="email"
+              type="tel"
             />
 
             <q-input
@@ -63,7 +66,6 @@
               v-model="user.password"
               label="Senha"
               type="password"
-              lazy-rules
             />
 
             <q-input
@@ -71,22 +73,33 @@
               v-model="user.confirmPassword"
               label="Confirme a sua senha"
               type="password"
-              lazy-rules
               autocomplete="nope"
             />
 
             <q-input
               dense
               v-model="user.name"
-              label="Nome e sobrenome"
-              lazy-rules
+              label="Nome completo"
             />
 
             <q-toggle
               v-model="terms"
-              label="I accept the license and terms"
+              class="q-px-none q-mx-none"
+              checked-icon="check"
+              unchecked-icon="clear"
               :rules="[ val => val === true || 'senhas não conferem', ]"
               autocomplete="nope"
+              label="Eu li e aceito os"
+            />
+            <!-- class="text-black q-px-none q-py-none" -->
+            <q-btn
+              class="q-mx-xs"
+              padding="0px"
+              style="padding-right: 5px; padding-left: 5px;"
+              label="termos de uso"
+              color="primary text-black"
+              size="md"
+              @click="card = true"
             />
             <q-card-actions align="right">
               <q-btn
@@ -108,8 +121,6 @@
               vertical
               align="center"
             >Já tem cadastro?
-              <!-- class="text-" -->
-              <!-- style="color: #00ff99;" -->
               <a
                 class="text-primary"
                 href
@@ -123,7 +134,7 @@
       </q-card>
       <q-card
         v-else
-        style="background-color: #333; position: absolute; top:19vh;"
+        style="background-color: #121212; position: absolute; top:15vh;"
         class="text-white"
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
@@ -138,6 +149,7 @@
           </q-avatar>
         </q-card-section>
         <br>
+        <br>
         <q-card-section>
           <q-form
             class="q-gutter-md"
@@ -149,19 +161,29 @@
 
             <q-input
               dense
-              v-model="user.email"
-              label="Email"
-              lazy-rules
+              v-model="user.phone"
+              prefix="+55"
+              label="Número de celular"
+              mask="(##) ##### - ####"
+              unmasked-value
               autocomplete="nope"
-              type="email"
+              type="tel"
             />
+
+            <!-- <q-input
+              filled
+              v-model="phone"
+              label="Phone"
+              mask="(##) ##### - ####"
+              fill-mask
+              hint="Mask: (##) ##### - ####"
+            /> -->
 
             <q-input
               dense
               v-model="user.password"
               label="Senha"
               type="password"
-              lazy-rules
             />
 
             <q-card-actions align="right">
@@ -208,6 +230,95 @@
       />
     </q-page-sticky>
   </q-page> -->
+    <q-dialog v-model="card">
+      <q-card class="my-card">
+        <q-img src="../../assets/pages/auth/google-maps.png" />
+
+        <q-card-section>
+          <q-btn
+            fab
+            color="primary"
+            icon="place"
+            class="absolute"
+            style="top: 0; right: 12px; transform: translateY(-50%);"
+          />
+
+          <div class="row no-wrap items-center">
+            <div class="col text-h6 ellipsis">
+              Nota média dos usuários
+            </div>
+            <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
+              2500
+              <q-icon name="mdi-account" />
+            </div>
+          </div>
+
+          <q-rating
+            v-model="stars"
+            :max="5"
+            size="32px"
+          />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1">
+            Localizacão em tempo real
+          </div>
+          <div class="text-caption text-grey">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac efficitur sapien, non euismod dolor. Etiam non pharetra tortor. Aenean enim erat, porttitor a commodo ac, volutpat id sem. Donec eu vehicula nibh. Sed elementum vulputate turpis, sit amet ultricies nunc eleifend cursus. Aliquam scelerisque sem ante, a tristique odio gravida id. Curabitur condimentum et justo malesuada efficitur.
+
+            Curabitur dapibus consequat massa a placerat. Pellentesque ullamcorper maximus purus eget imperdiet. Integer hendrerit eu arcu at pharetra. Vivamus at diam vel elit cursus convallis. Mauris vitae semper nibh. Phasellus ac tincidunt magna. Ut consectetur purus non faucibus finibus. Donec et erat nec tortor cursus fermentum ut et leo. Quisque vel metus leo. Curabitur mi purus, gravida id aliquet vel, accumsan eget nunc.
+
+            Quisque mattis est sed tincidunt eleifend. Nunc efficitur erat vel elit dignissim, in tristique purus sollicitudin. Ut commodo semper tellus in vulputate. Suspendisse sit amet porttitor felis, non pretium ipsum. Aenean tristique sagittis arcu, eget ultricies nisi consectetur a. Proin congue vehicula libero, vel vehicula nulla dignissim sit amet. Maecenas congue gravida convallis. Morbi consectetur sed lectus in pretium. Donec at fringilla felis. Pellentesque congue cursus facilisis. Cras nec erat ac dolor lobortis vulputate quis non elit. Proin commodo volutpat lorem lacinia eleifend. Donec odio diam, placerat fermentum lectus ut, efficitur vulputate leo. Pellentesque in eleifend velit.
+
+            Donec sodales nisl eu nisl aliquam convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque eget ullamcorper metus, vel suscipit diam. Sed rutrum neque a libero hendrerit, quis ornare est scelerisque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris ultrices faucibus felis facilisis cursus. Cras et ante risus. Ut porttitor erat non felis interdum, ut dapibus augue pharetra. Sed mollis magna velit, et varius felis luctus vitae. Curabitur commodo auctor velit, vitae tristique nisi dignissim ac. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+            Nam faucibus, nibh eu maximus volutpat, nulla ex commodo ex, at iaculis urna est a dolor. Suspendisse potenti. Nunc ac purus sed est placerat facilisis ac vitae felis. Nullam a tortor sit amet ligula vestibulum sagittis quis et ipsum. Maecenas volutpat mauris et justo hendrerit porta. Sed nec orci in sapien luctus convallis. Nullam semper semper sem a gravida. Sed vel orci sollicitudin, finibus justo vitae, blandit orci. Pellentesque accumsan lorem dolor, in porta lorem vestibulum ut. Nulla facilisi. Praesent sit amet augue ac leo congue efficitur. Proin mollis facilisis elementum. Etiam eget tempus leo.
+
+          </div>
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1">
+            Divulgacão dos dados entre usuarios
+          </div>
+          <div class="text-caption text-grey">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac efficitur sapien, non euismod dolor. Etiam non pharetra tortor. Aenean enim erat, porttitor a commodo ac, volutpat id sem. Donec eu vehicula nibh. Sed elementum vulputate turpis, sit amet ultricies nunc eleifend cursus. Aliquam scelerisque sem ante, a tristique odio gravida id. Curabitur condimentum et justo malesuada efficitur.
+
+            Curabitur dapibus consequat massa a placerat. Pellentesque ullamcorper maximus purus eget imperdiet. Integer hendrerit eu arcu at pharetra. Vivamus at diam vel elit cursus convallis. Mauris vitae semper nibh. Phasellus ac tincidunt magna. Ut consectetur purus non faucibus finibus. Donec et erat nec tortor cursus fermentum ut et leo. Quisque vel metus leo. Curabitur mi purus, gravida id aliquet vel, accumsan eget nunc.
+
+            Quisque mattis est sed tincidunt eleifend. Nunc efficitur erat vel elit dignissim, in tristique purus sollicitudin. Ut commodo semper tellus in vulputate. Suspendisse sit amet porttitor felis, non pretium ipsum. Aenean tristique sagittis arcu, eget ultricies nisi consectetur a. Proin congue vehicula libero, vel vehicula nulla dignissim sit amet. Maecenas congue gravida convallis. Morbi consectetur sed lectus in pretium. Donec at fringilla felis. Pellentesque congue cursus facilisis. Cras nec erat ac dolor lobortis vulputate quis non elit. Proin commodo volutpat lorem lacinia eleifend. Donec odio diam, placerat fermentum lectus ut, efficitur vulputate leo. Pellentesque in eleifend velit.
+
+            Donec sodales nisl eu nisl aliquam convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque eget ullamcorper metus, vel suscipit diam. Sed rutrum neque a libero hendrerit, quis ornare est scelerisque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris ultrices faucibus felis facilisis cursus. Cras et ante risus. Ut porttitor erat non felis interdum, ut dapibus augue pharetra. Sed mollis magna velit, et varius felis luctus vitae. Curabitur commodo auctor velit, vitae tristique nisi dignissim ac. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+            Nam faucibus, nibh eu maximus volutpat, nulla ex commodo ex, at iaculis urna est a dolor. Suspendisse potenti. Nunc ac purus sed est placerat facilisis ac vitae felis. Nullam a tortor sit amet ligula vestibulum sagittis quis et ipsum. Maecenas volutpat mauris et justo hendrerit porta. Sed nec orci in sapien luctus convallis. Nullam semper semper sem a gravida. Sed vel orci sollicitudin, finibus justo vitae, blandit orci. Pellentesque accumsan lorem dolor, in porta lorem vestibulum ut. Nulla facilisi. Praesent sit amet augue ac leo congue efficitur. Proin mollis facilisis elementum. Etiam eget tempus leo.
+
+          </div>
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-actions align="right">
+          Eu li e aceito os termos de uso:
+          <q-btn
+            v-close-popup
+            flat
+            color="primary"
+            label="Não"
+            @click="terms = false"
+          />
+          <q-btn
+            v-close-popup
+            label="Sim"
+            color="primary text-black"
+            @click="terms = true"
+          />
+          <!-- icon="event" -->
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -220,6 +331,8 @@ export default {
   data () {
     return {
       // category: {},
+      stars: 4,
+      card: false,
       showSignup: false,
       user: {},
       terms: false,
@@ -238,19 +351,23 @@ export default {
   // },
   methods: {
     dialogTerms () {
-      this.$q.dialog({
-        dark: true,
-        title: 'Apagar',
-        message: 'Você aceita os termos e condicoes de uso?',
-        cancel: true,
-        persistent: true
-      }).onOk(() => {
-        this.terms = true
-      }).onCancel(() => {
-      }).onDismiss(() => {
-      })
+      this.card = true
+      // this.$q.dialog({
+      //   dark: true,
+      //   title: 'Termos de uso',
+      //   message: 'Você aceita os termos e condicoes de uso?',
+      //   cancel: true,
+      //   persistent: true
+      // }).onOk(() => {
+      //   this.terms = true
+      // }).onCancel(() => {
+      //   label: 'Termos de uso'
+      // }).onDismiss(() => {
+      // })
     },
     signIn () {
+      // let phone = this.user.phone
+      // this.user.phone = '+55' + phone
       axios.post(`${baseApiUrl}/signin`, this.user)
         .then(res => {
           this.$store.commit('user/setUser', res.data)
@@ -258,9 +375,13 @@ export default {
           this.$router.push({ path: '/' })
         })
         .catch(showError)
+      // this.user.phone = phone
     },
     signUp () {
       if (this.terms === true) {
+        // let phone = this.user.phone
+        // this.user.phone = '+55' + phone
+        console.log(this.user)
         axios.post(`${baseApiUrl}/signup`, this.user)
           .then(() => {
             this.$toasted.global.defaultSuccess()
@@ -270,8 +391,10 @@ export default {
             this.showSignup = false
           })
           .catch(showError)
+        // this.user.phone = phone
       } else {
-        this.dialogTerms()
+        // this.dialogTerms()
+        this.card = true
       }
     },
     // makeid (length) {

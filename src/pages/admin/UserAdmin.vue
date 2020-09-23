@@ -32,7 +32,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -42,8 +42,8 @@
           <q-input
             standout
             color="white"
-            v-model="user.email"
-            hint="Email - necessário pelo menos 4 caracteres"
+            v-model="user.phone"
+            hint="phone - necessário pelo menos 4 caracteres"
             label-slot
             :rules="[ val => val && val.length >= 4 || 'Please type something']"
             clearable
@@ -56,14 +56,14 @@
                   size="24px"
                   name="mail"
                 />
-                Informe o Email do Usuário...
+                Informe o phone do Usuário...
                 <q-tooltip
                   content-class="bg-grey-8"
                   anchor="top left"
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher</q-tooltip>
+                  this will be your phone login... for more info contact your teacher</q-tooltip>
               </div>
             </template>
           </q-input>
@@ -95,7 +95,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -127,7 +127,7 @@
                   self="bottom left"
                   :offset="[0, 8]"
                 >
-                  this will be your email login... for more info contact your teacher
+                  this will be your phone login... for more info contact your teacher
                 </q-tooltip>
               </div>
             </template>
@@ -259,7 +259,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -269,8 +269,8 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="user.email"
-                    hint="Email - necessário pelo menos 4 caracteres"
+                    v-model="user.phone"
+                    hint="phone - necessário pelo menos 4 caracteres"
                     label-slot
                     :rules="[ val => val && val.length >= 4 || 'Please type something']"
                     clearable
@@ -283,7 +283,7 @@
                           size="24px"
                           name="mail"
                         />
-                        Informe o Email do Usuário...
+                        Informe o phone do Usuário...
 
                         <q-tooltip
                           content-class="bg-grey-8"
@@ -291,7 +291,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher</q-tooltip>
+                          this will be your phone login... for more info contact your teacher</q-tooltip>
                       </div>
                     </template>
                   </q-input>
@@ -323,7 +323,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -356,7 +356,7 @@
                           self="bottom left"
                           :offset="[0, 8]"
                         >
-                          this will be your email login... for more info contact your teacher
+                          this will be your phone login... for more info contact your teacher
                         </q-tooltip>
                       </div>
                     </template>
@@ -364,12 +364,13 @@
                 </div>
               </div>
 
-              <q-toggle
-                v-model="user.admin"
+              <!-- <q-toggle
+                v-model="user.role"
                 label="administrador?"
                 checked-icon="fa fa-unlock"
                 unchecked-icon="fa fa-lock"
-              />
+              /> -->
+              <!-- colocar um select com multiplos strings -->
 
               <div class="row">
                 <q-btn
@@ -419,7 +420,7 @@ export default {
       fields: [
         { key: 'id', label: 'Código', sortable: true },
         { key: 'name', label: 'Nome', sortable: true },
-        { key: 'email', label: 'E-mail', sortable: true },
+        { key: 'phone', label: 'Phone', sortable: true },
         {
           key: 'admin', label: 'Administrador', sortable: true,
           formatter: value => value ? 'Sim' : 'Não'

@@ -1,7 +1,57 @@
 <template>
   <div>
+    <!-- SÓ O ADMIN PODE ABRIR -->
+    <!-- <q-toggle
+      toggle-indeterminate
+      v-model="deviceState"
+      checked-icon="fas fa-lock"
+      indeterminate-icon="mdi-account-lock bg-red text-white rounded-borders"
+      unchecked-icon="fas fa-unlock"
+      color="red"
+      size="xl"
+      dense
+      :keep-color="true"
+      style="border-radius: 50px; background: red;"
+    /> -->
+    <!-- indeterminate-icon="mdi-account-lock bg-red text-white rounded-borders" -->
+    <!-- toggle-indeterminate -->
+    <q-btn
+      color="secondary"
+      @click="$q.dark.toggle()"
+      :icon="$q.dark.isActive ? 'fas fa-moon' : 'fas fa-sun'"
+    />
+    <q-btn
+      color="primary text-black"
+      @click="$q.fullscreen.toggle()"
+      :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
+      :label="$q.fullscreen.isActive ? 'Exit Fullscreen' : 'Go Fullscreen'"
+    />
+    <q-toggle
+      v-model="deviceState"
+      checked-icon="fas fa-lock"
+      unchecked-icon="fas fa-unlock"
+      color="red"
+      size="xl"
+      dense
+    />
+    <q-toggle
+      v-model="deviceStateAdmin"
+      checked-icon="fas fa-user-lock"
+      unchecked-icon="fas fa-user"
+      color="red"
+      size="xl"
+      dense
+    />
+    <!-- dark -->
+    <!-- style="border-radius: 50px; background: red;" -->
+    <!-- :keep-color="true" -->
+    {{deviceState}}
+    <!-- label="oi" -->
+    <!-- disable -->
+    <!-- class="text-black" -->
     <Lock />
-    <UserProfile v-if="$store.state.user.user" />
+    <!-- <q-btn /> -->
+    <!-- <UserProfile v-if="$store.state.user.user" /> -->
     <!-- <q-toolbar :class="$q.dark.isActive ? 'bg-black text-white': 'bg-white text-black'">
       <q-input
         dense
@@ -52,6 +102,18 @@ export default {
     UserProfile,
     Lock
   },
+  data () {
+    return {
+      deviceState: false,
+      deviceStateAdmin: false,
+      treeFilter: '',
+      treeData: this.getTreeData(),
+      treeOptions: {
+        propertyNames: { 'text': 'name' },
+        filter: { emptyText: 'Categoria não encontrada' }
+      }
+    }
+  },
   computed: {
     isMenuVisible: {
       get () {
@@ -73,20 +135,10 @@ export default {
         params: { id: node.id }
       })
     }
-  },
+  }
   // mounted () {
   //   this.$refs.tree.$on('node:selected', this.onNodeSelect)
   // },
-  data () {
-    return {
-      treeFilter: '',
-      treeData: this.getTreeData(),
-      treeOptions: {
-        propertyNames: { 'text': 'name' },
-        filter: { emptyText: 'Categoria não encontrada' }
-      }
-    }
-  }
 }
 </script>
 

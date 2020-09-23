@@ -23,10 +23,10 @@
             (device.name.length > 13 ? device.name.substring(0,11) + '...' : device.name) : (device.name.length > 15 ? device.name.substring(0,13) + '...' : device.name)}} -->
         </div>
         <div class="text-caption text-grey">
-          {{device.description}}
-          <!-- {{ $mq === 'xs' ? (device.description.length > 28 ? device.description.substring(0,26) + '...' : device.description)
-            : $mq === 'sm' ? device.description.substring(0,50)
-            : device.description.substring(0,80)}} -->
+          {{device.nickname}}
+          <!-- {{ $mq === 'xs' ? (device.nickname.length > 28 ? device.nickname.substring(0,26) + '...' : device.nickname)
+            : $mq === 'sm' ? device.nickname.substring(0,50)
+            : device.nickname.substring(0,80)}} -->
         </div>
       </q-card-section>
     </q-card-section>
@@ -83,12 +83,12 @@ export default {
     }
   },
   methods: {
-    onNodeDevices (id) {
-      this.$router.push({
-        name: 'userDevicesByCategory',
-        params: { id: JSON.parse(this.device.categoryId) }
-      })
-    }
+    // onNodeDevices (id) {
+    //   this.$router.push({
+    //     name: 'userDevicesByCategory',
+    //     params: { id: JSON.parse(this.device.categoryId) }
+    //   })
+    // }
   }
 }
 </script>

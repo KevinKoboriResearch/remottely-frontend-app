@@ -44,7 +44,7 @@
           <q-input
             standout
             color="white"
-            v-model="device.description"
+            v-model="device.nickname"
             label-slot
             hint="Nome - necessário pelo menos 4 caracteres"
             clearable
@@ -130,10 +130,6 @@
           />
         </div> -->
       </div>
-      <VueEditor
-        v-model="device.content"
-        placeholder="Informe o Conteúdo do Artigo..."
-      />
       <div class="row">
         <q-btn
           @click="save"
@@ -265,7 +261,7 @@
                   <q-input
                     standout
                     color="white"
-                    v-model="device.description"
+                    v-model="device.nickname"
                     label-slot
                     hint="Nome - necessário pelo menos 4 caracteres"
                     clearable

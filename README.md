@@ -261,3 +261,9 @@ flutter:
 
 DIAGRAMS NODE GRAPHS:
 - RETE.JS: https://github.com/retejs/rete
+
+salvou mina vida:
+- http://knexjs.org/
+
+- imagens de graca
+https://pixabay.com/

@@ -3,7 +3,7 @@
     <PageTitle
       icon="fa fa-file-o"
       :main="device.name"
-      :sub="device.description"
+      :sub="device.nickname"
     />
     <div class="fit row wrap justify-center items-center content-center">
       <q-form class="q-gutter-md">
@@ -44,7 +44,7 @@
             <q-input
               standout
               color="white"
-              v-model="device.description"
+              v-model="device.nickname"
               label-slot
               clearable
             >
@@ -128,12 +128,12 @@
           />
           <q-space />
           <q-btn
-            @click="showForm = false"
             label="Cancelar"
             type="cancel"
             color="primary"
             flat
             class="q-ml-sm"
+            to="/dashboard"
           />
         </div>
         <br>

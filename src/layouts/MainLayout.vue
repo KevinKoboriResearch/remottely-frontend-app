@@ -23,12 +23,12 @@
           icon="menu"
           @click="left = !left"
         >
-          <!-- <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip> -->
+          <q-tooltip v-if="$q.screen.gt.xs">CATEGORIAS</q-tooltip>
         </q-btn>
 
         <q-space />
 
-        <div @click="!user ? $router.push('/') : $router.push('/dashboard')">
+        <div @click="!user ? $router.push('/') : $router.push('/user/user-map-marker')">
           <img
             style="margin-top: 8px;"
             class="q-px-sm"
@@ -44,7 +44,7 @@
 
         <!-- <q-space /> -->
         <!-- color="secondary" -->
-        <!-- v-if="user.admin" -->
+        <!-- v-if="user.role == 'adminApp'" -->
         <!-- <UserDropdown v-scrollanimation /> -->
         <!-- <q-btn
           else
@@ -60,12 +60,12 @@
           flat
           icon="fa fa-user"
           to="auth"
-        />
+        /> -->
 
         <q-btn
           v-scrollanimation
           :size="right ? '17px' : '10px'"
-          v-else
+          v-if="user"
           dense
           flat
           :padding="right ? 'none' : ''"
@@ -73,8 +73,8 @@
           :icon="right ? 'mdi-close' : 'fa fa-user-cog'"
           @click="right = !right"
         >
-          <q-tooltip v-if="$q.screen.gt.xs">config</q-tooltip>
-        </q-btn> -->
+          <q-tooltip v-if="$q.screen.gt.xs">USER</q-tooltip>
+        </q-btn>
         <!-- <q-btn
           v-if="user"
           square
@@ -85,7 +85,7 @@
         >
           <q-tooltip v-if="$q.screen.gt.xs">menu</q-tooltip>
         </q-btn> -->
-        <q-btn
+        <!-- <q-btn
           v-if="user"
           round
           padding="none"
@@ -95,7 +95,7 @@
           flat
           dense
           @click="$q.dark.toggle()"
-        />
+        /> -->
       </q-toolbar>
 
       <q-tabs
@@ -136,13 +136,16 @@
       side="left"
       content-class="bg-white"
     >
-      <!-- <LeftDrawer v-if="!user" /> -->
-      <LeftDrawerUser v-if="!user.admin" />
-      <LeftDrawerAdmin v-else />
+      <LeftDrawerUser />
+      <!-- <LeftDrawerUser v-if="user.role == 'tester'" /> -->
+      <!-- v-if="user.role == 'tester'" -->
+      <!-- <LeftDrawerAdminLocal v-if="user.role == 'adminLocal'" /> -->
+      <!-- <LeftDrawerAdmin v-else-if="user.role == 'adminApp'" /> -->
+      <!-- <LeftDrawer v-else-if="user.role == 'viewer'" /> -->
     </q-drawer>
 
     <q-drawer
-      v-if="user"
+      v-if="!validatingToken && user"
       v-model="right"
       side="right"
       content-class="bg-white"
@@ -156,6 +159,7 @@
         v-if="validatingToken"
       />
       <div v-else>
+        <!-- {{user}} -->
         <router-view
           v-scrollanimation
           class="q-pa-md"
@@ -300,7 +304,8 @@ export default {
 
       const json = localStorage.getItem(userKey)
       const userData = JSON.parse(json)
-      this.$store.commit('user/setUser', null)
+      this.user = null
+      // this.$store.commit('user/setUser', null)
 
       if (!userData) {
         this.validatingToken = false
@@ -326,6 +331,7 @@ export default {
   },
   created () {
     this.validateToken()
+    // console.log(this.user)
   }
 }
 </script>
@@ -356,36 +362,7 @@ body::-webkit-scrollbar {
   user-select: none;
 }
 
-.drawer-bg {
+/* .drawer-bg {
   background-color: white;
-}
-
-/* * {
-  font-family: "Lato", sans-serif;
-}
-
-body {
-  margin: 0;
-}
-
-#q-app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 60px 1fr 40px;
-  grid-template-columns: 300px 1fr;
-  grid-template-areas:
-    "header header"
-    "menu content"
-    "menu footer";
-}
-
-#q-app.hide-menu {
-  grid-template-areas:
-    "header header"
-    "content content"
-    "footer footer";
 } */
 </style>
