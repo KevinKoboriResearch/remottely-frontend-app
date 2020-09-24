@@ -283,3 +283,9 @@ tutorial activeClass
 
 NEUMORPHISM:
 - neumorphism-ui-bootstrap-master
+
+
+
+
+
+FOR > STYLE: MARGIN-TOP: valor * i; Z-INDEX = i;

@@ -1,15 +1,18 @@
 <template>
-  <q-page class="q-pa-sm">
+  <div class="q-pa-sm">
+    <!-- <q-page class="q-pa-sm"> -->
     <div
       id="myMap"
-      style="height: 85vh;"
+      style="height: 25vh;"
     ></div>
-  </q-page>
+    <!-- style="height: 85vh;" -->
+    <!-- </q-page> -->
+  </div>
 </template>
 
 <script>
 export default {
-  name: "UserMaps",
+  name: "UserMapsDialog",
   data () {
     return {
       mapData: ''

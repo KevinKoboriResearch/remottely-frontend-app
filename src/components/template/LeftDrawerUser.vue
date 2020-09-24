@@ -37,7 +37,10 @@
         color="primary"
         inset
       />
-      <q-btn
+
+      <UserDevices />
+
+      <!-- <q-btn
         align="left"
         flat
         spread
@@ -46,7 +49,7 @@
         label="Histórico de acessos"
         to='/user/devices-history'
       />
-      <!-- <q-btn
+      <q-btn
         align="left"
         flat
         spread
@@ -54,7 +57,7 @@
         style="width:100%;"
         label="Configuracoes das chaves"
         to='/user/device-history'
-      /> -->
+      />
       <q-btn
         align="left"
         flat
@@ -64,7 +67,7 @@
         label="Notificacões"
         to='/user/notifications'
       />
-      <!-- <q-btn
+      <q-btn
         align="left"
         flat
         spread
@@ -72,7 +75,7 @@
         style="width:100%;"
         label="Usuários"
         to='/user/profile'
-      /> -->
+      />
       <q-btn
         align="left"
         flat
@@ -90,14 +93,18 @@
         style="width:100%;"
         label="Contrate-nos aqui"
         to='/'
-      />
+      /> -->
     </q-card>
   </div>
 </template>
 
 <script>
+import UserDevices from '../../pages/user/UserDevices'
 export default {
-
+  name: 'LeftDrawerUser',
+  components: {
+    UserDevices
+  }
 }
 </script>
 

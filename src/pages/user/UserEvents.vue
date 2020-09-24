@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="bg-primary text-black">
     <div
-      class="dots"
+      class="menu-dots"
       onclick="this.classList.toggle('active');"
     >
-      <div class="dot"></div>
-      <div class="dot"></div>
+      <div class="menu-dot"></div>
+      <div class="menu-dot"></div>
       <div class="shadow cut"></div>
-      <div class="container cut">
+      <div class="container-menu-dots cut">
         <div class="drop cut2"></div>
       </div>
       <div class="list">
@@ -29,11 +29,11 @@
           </li>
         </ul>
       </div>
-      <div class="dot"></div>
+      <div class="menu-dot"></div>
     </div>
     <div
       class="cursor"
-      onclick="document.querySelector('.dots').classList.toggle('active');"
+      onclick="document.querySelector('.menu-dots').classList.toggle('active');"
     ></div>
   </div>
 </template>
@@ -44,15 +44,15 @@ export default {
 }
 </script>
 
-<style lang="css">
-body {
+<style lang="css" scoped>
+/* body {
   background: #4aa6fb;
   display: flex;
   font-family: sans-serif;
   justify-content: center;
   margin: 0;
-}
-.dots {
+} */
+.menu-dots {
   display: flex;
   margin-top: 30px;
   padding: 10px;
@@ -205,7 +205,7 @@ body {
     50.228869% 0%
   );
 }
-.container {
+.container-menu-dots {
   display: flex;
   height: 400px;
   justify-content: center;
@@ -216,14 +216,14 @@ body {
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 325px;
 }
-.dot {
+.menu-dot {
   background: #fff;
   border-radius: 50%;
   height: 10px;
   margin-right: 5px;
   width: 10px;
 }
-.dot:last-child {
+.menu-dot:last-child {
   margin-right: 0;
 }
 .drop {
@@ -258,7 +258,7 @@ body {
 }
 .list li {
   align-items: center;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid #000;
   display: flex;
   font-size: 24px;
   height: 50px;
@@ -272,30 +272,30 @@ body {
 .list li:hover {
   background: #f5f5f5;
 }
-.dots.active .container {
+.menu-dots.active .containermenu-dots {
   transform: translateX(-50%) translateY(20px);
 }
-.dots.active .drop {
+.menu-dots.active .drop {
   transform: translateY(212px) scale(108);
 }
-.dots.active .list li {
+.menu-dots.active .list li {
   cursor: pointer;
   opacity: 1;
   transition: opacity 200ms 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.dots.active .list li:nth-child(2) {
+.menu-dots.active .list li:nth-child(2) {
   transition-delay: 130ms;
 }
-.dots.active .list li:nth-child(3) {
+.menu-dots.active .list li:nth-child(3) {
   transition-delay: 160ms;
 }
-.dots.active .list li:nth-child(4) {
+.menu-dots.active .list li:nth-child(4) {
   transition-delay: 190ms;
 }
-.dots.active .list li:nth-child(5) {
+.menu-dots.active .list li:nth-child(5) {
   transition-delay: 220ms;
 }
-.dots.active .shadow {
+.menu-dots.active .shadow {
   opacity: 1;
   transition: opacity 150ms 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }

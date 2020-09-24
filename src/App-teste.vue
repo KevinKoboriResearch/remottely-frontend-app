@@ -1,38 +1,79 @@
 <template>
-  <div id="q-app">
-    <router-view />
+  <div>
+    <header id="header">
+      <nav class="nav">
+        <button
+          class="toggle-menu"
+          onclick="document.querySelector('.toggle-menu').classList.toggle('active');
+          document.querySelector('#menu').classList.toggle('open');"
+        >
+          <span></span>
+        </button>
+      </nav>
+    </header>
+
+    <div
+      id="menu"
+      class=""
+    >
+      <nav class="main-nav">
+        <ul>
+          <li>
+            <a href="#">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Pricing
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <footer class="menu-footer">
+        <nav class="footer-nav">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa fa-twitter fa-fw"></i>
+                Twitter
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-envelope fa-fw"></i>
+                Subscribe
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+
 }
 </script>
-
-<style>
-body::-webkit-scrollbar {
-  width: 0px;
-}
-
-.selectDisable {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-</style>
 
 <style lang="scss">
 // Some base styles
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700);
 
-/* body {
+body {
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: radial-gradient(circle, #322538, #1f1f1f);
   font-size: 13px;
-} */
+}
 
 #header {
   padding: 2rem;
@@ -40,7 +81,7 @@ body::-webkit-scrollbar {
 
 // It actually starts here
 
-$menu-bg: $primary;
+$menu-bg: #de4152;
 $menu-color: #ffffff;
 $menu-font-size: 2.5rem;
 $menu-zindex: 1100;

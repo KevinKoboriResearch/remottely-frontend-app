@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="q-app">
     <main class="site-wrapper">
       <div class="pt-table desktop-768">
         <div
@@ -13,6 +13,11 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                <div class="page-title  home text-center">
+                  <span class="heading-page"> Welcome to My Page
+                  </span>
+                  <p class="mt20">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
 
                 <div class="hexagon-menu clear">
                   <div class="hexagon-item">
@@ -26,8 +31,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -62,8 +67,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -98,8 +103,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -134,8 +139,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -170,8 +175,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="http://cakecounter.com" -->
                     <a
-                      href="http://cakecounter.com"
                       target="_blank"
                       class="hex-content"
                     >
@@ -206,8 +211,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -242,8 +247,8 @@
                       <div></div>
                       <div></div>
                     </div>
+                    <!-- href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s" -->
                     <a
-                      href="https://www.youtube.com/watch?v=j0_gIAHkaj4&t=9s"
                       target="_blank"
                       class="hex-content"
                     >
@@ -279,7 +284,7 @@
 
 <script>
 export default {
-
+  name: 'App'
 }
 </script>
 

@@ -1,11 +1,19 @@
 <template>
   <div>
     <ul>
-      <li><a href="#">home</a></li>
-      <li><a href="#">archives</a></li>
-      <li><a href="#">tags</a></li>
-      <li><a href="#">categories</a></li>
-      <li><a href="#">about</a></li>
+      <li><a href="/#/">Minhas Chaves / eventos</a></li>
+      <li><a href="/#/user/devices-history">Histórico de acessos</a></li>
+      <li><a href="/#">Configuracoes das chaves</a></li>
+      <li><a href="/#/user/events">Notificacões</a></li>
+      <li><a href="/#/user/notifications">Usuários</a></li>
+      <li><a href="/#/user/profile">Meu Perfil</a></li>
+      <!-- <br>
+      <li><a href="#">Minhas Chaves / eventos</a></li>
+      <li><a href="#">Histórico de acessos</a></li>
+      <li><a href="#">Configuracoes das chaves</a></li>
+      <li><a href="#">Notificacões</a></li>
+      <li><a href="#">Usuários</a></li>
+      <li><a href="#">Meu Perfil</a></li> -->
     </ul>
   </div>
 </template>
@@ -16,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
 body {
@@ -54,7 +62,7 @@ ul {
         left: 0;
         width: 100%;
         height: 3px;
-        background: #3498db;
+        background: #9900ff;
         transform: scaleX(0);
         transform-origin: right;
         transition: transform 0.5s;

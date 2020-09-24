@@ -4,18 +4,72 @@
     view="lHr LpR lFf"
     :style="$q.dark.isActive ? 'background: black;' : ''"
   >
-    <!-- <div> -->
-    <header id="header">
-      <nav class="nav">
-        <button
-          class="toggle-menu"
-          onclick="document.querySelector('.toggle-menu').classList.toggle('active');
-          document.querySelector('#menu').classList.toggle('open');"
+    <q-header
+      v-if="!validatingToken"
+      height-hint="98"
+      style="background-color: #000000"
+    >
+      <q-toolbar v-scrollanimation>
+        <q-btn
+          square
+          dense
+          flat
+          icon="menu"
+          @click="left = !left"
         >
-          <span></span>
-        </button>
-      </nav>
-    </header>
+          <q-tooltip v-if="$q.screen.gt.xs">CATEGORIAS</q-tooltip>
+        </q-btn>
+
+        <q-space />
+
+        <div @click="$router.push('/user/maps')">
+          <img
+            style="margin-top: 8px;"
+            class="q-px-sm"
+            src="../assets/logo/remottely-dark.png"
+            height="22"
+          >
+        </div>
+
+        <q-space />
+
+        <q-btn
+          v-scrollanimation
+          :size="right ? '17px' : '10px'"
+          dense
+          flat
+          :padding="right ? 'none' : ''"
+          :class="right ? '' : 'q-pa-xs'"
+          :icon="right ? 'mdi-close' : 'fa fa-user-cog'"
+          @click="right = !right"
+        >
+          <q-tooltip v-if="$q.screen.gt.xs">USER</q-tooltip>
+        </q-btn>
+
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer
+      v-if="!validatingToken"
+      :show-if-above="$route.fullPath != '/auth'"
+      v-model="left"
+      side="left"
+    >
+      <!-- <LeftDrawerUser /> -->
+      <Menu />
+      <!-- content-class="q-pa-md bg-grey-10" -->
+      <!-- <LeftDrawerAdmin v-else-if="user.role == 'manager'" /> -->
+      <!-- <LeftDrawerAdmin v-else-if="user.role == 'admin'" /> -->
+    </q-drawer>
+
+    <q-drawer
+      v-if="!validatingToken"
+      v-model="right"
+      side="right"
+    >
+      <!-- content-class="bg-white" -->
+      <RightDrawer />
+    </q-drawer>
 
     <q-page-container>
       <Loading
@@ -30,51 +84,23 @@
       </div>
     </q-page-container>
 
-    <div
-      id="menu"
-      class=""
+    <!-- <q-footer
+      v-if="!validatingToken"
+      class="bg-black text-white"
     >
-      <nav class="main-nav">
-        <ul>
-          <li>
-            <a href="#">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              Pricing
-            </a>
-          </li>
+      <q-tabs v-scrollanimation>
+        <q-space v-if="$q.screen.gt.xs" />
+        <q-route-tab
+          label="Chaves"
+          to="/user/devices"
+        />
+        <q-route-tab
+          label="Eventos"
+          to="/user/events"
+        />
+      </q-tabs>
+    </q-footer> -->
 
-          <li>
-            <a href="#">
-              Contact
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <footer class="menu-footer">
-        <nav class="footer-nav">
-          <ul>
-            <li>
-              <a href="#">
-                <i class="fa fa-twitter fa-fw"></i>
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-envelope fa-fw"></i>
-                Subscribe
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </footer>
-    </div>
-    <!-- </div> -->
   </q-layout>
 </template>
 
@@ -177,5 +203,19 @@ export default {
 .enter {
   opacity: 1;
   filter: blur(0px);
+}
+</style>
+
+<style scoped>
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+.selectDisable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 </style>

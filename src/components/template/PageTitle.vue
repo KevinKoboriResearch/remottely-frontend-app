@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /* .page-title h1 {
   margin: 0px;
 }

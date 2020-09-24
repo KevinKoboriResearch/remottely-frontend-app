@@ -5,6 +5,9 @@
 // import BootstrapVue from 'bootstrap-vue'
 
 // Vue.use(BootstrapVue)
+// import neumorphic from 'neumorphic-ui-vue'
+// Vue.use(neumorphic)
+
 import DisableAutocomplete from '@aacassandra/vue-disable-autocomplete'
 
 Vue.use(DisableAutocomplete)
