@@ -1,39 +1,5 @@
 <template>
   <div class="q-pa-xs">
-    <!-- {{user}} -->
-    <!-- <div class="fit row no-wrap justify-between items-start content-start">
-      <q-toolbar class="q-mb-xs bg-primary text-black shadow-2 rounded-borders">
-        <q-btn
-          label="Fechar"
-          padding="none"
-          class="q-pa-xs q-mr-sm"
-          size="md"
-          flat
-          dense
-          @click.prevent="right = !right"
-        />
-        <q-space />
-        <q-btn
-          round
-          padding="none"
-          class="q-pa-xs q-mr-sm"
-          icon="fa fa-adjust"
-          size="sm"
-          flat
-          dense
-          @click="$q.dark.toggle()"
-        />
-        <q-btn
-          padding="none"
-          class="q-pa-xs"
-          size="sm"
-          flat
-          dense
-          @click="$q.fullscreen.toggle()"
-          :icon="$q.fullscreen.isActive  ? 'fas fa-compress' : 'fas fa-expand'"
-        />
-      </q-toolbar>
-    </div> -->
     <q-card class="my-card">
       <q-item>
         <q-item-section
@@ -381,11 +347,9 @@
 import { baseApiUrl, showError, userKey } from '../../global'
 import axios from 'axios'
 import { QSpinnerGears } from 'quasar'
-// import { VueEditor } from "vue2-editor"
 
 export default {
   name: 'UserProfile',
-  // components: { VueEditor },
   data () {
     return {
       pagination: {

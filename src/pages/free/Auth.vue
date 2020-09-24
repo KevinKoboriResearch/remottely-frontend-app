@@ -1,36 +1,39 @@
 <template>
-  <q-page class="bg-black">
-    <!-- <q-page
+  <q-layout
     class="selectDisable"
-    style="background:linear-gradient( 180deg, #16434d 0%, #c1f4ff 100%)"
+    view="hHh lpR fFf"
+    :class="$q.dark.isActive ? 'bg-black' : ''"
   >
-    <q-header class="bg-transparent">
+    <q-header :class="$q.dark.isActive ? 'bg-black' : 'bg-white'">
       <q-toolbar v-scrollanimation>
+        <!-- <q-btn
+          color="secondary"
+          @click="$q.dark.toggle()"
+          :icon="$q.dark.isActive ? 'fas fa-moon' : 'fas fa-sun'"
+        /> -->
         <q-space />
 
-        <div>
+        <div @click="$q.dark.toggle()">
           <img
             style="margin-top: 8px;"
             class="q-px-sm"
-            to="/"
-            src="../../assets/logo/remottely.png"
+            :src="$q.dark.isActive ? require('../../assets/logo/remottely-dark.png') : require('../../assets/logo/remottely-light.png')"
             height="22"
           >
-          <q-tooltip v-if="$q.screen.gt.xs">theme</q-tooltip>
         </div>
 
         <q-space />
+
       </q-toolbar>
-    </q-header> -->
+    </q-header>
     <div class="fit row wrap justify-center items-center content-center">
       <q-card
-        v-if="showSignup"
-        style="background-color: #121212; position: absolute; top:15vh;"
-        class="text-white"
+        v-scrollanimation
+        v-show="showSignup"
+        style="position: absolute; top: 20%;"
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
         <q-card-section>
-          <!-- style="background-color: #00ff99" -->
           <q-avatar
             color="primary"
             size="90px"
@@ -85,8 +88,6 @@
             <q-toggle
               v-model="terms"
               class="q-px-none q-mx-none"
-              checked-icon="check"
-              unchecked-icon="clear"
               :rules="[ val => val === true || 'senhas não conferem', ]"
               autocomplete="nope"
               label="Eu li e aceito os"
@@ -133,9 +134,9 @@
         </q-card-section>
       </q-card>
       <q-card
-        v-else
-        style="background-color: #121212; position: absolute; top:15vh;"
-        class="text-white"
+        v-show="!showSignup"
+        v-scrollanimation
+        style="position: absolute; top: 30%;"
         :style="$q.screen.lt.sm?{'width': '80%'}: $q.screen.lt.md? {'width':'45%'} : {'width':'30%'}"
       >
         <q-card-section>
@@ -169,15 +170,6 @@
               autocomplete="nope"
               type="tel"
             />
-
-            <!-- <q-input
-              filled
-              v-model="phone"
-              label="Phone"
-              mask="(##) ##### - ####"
-              fill-mask
-              hint="Mask: (##) ##### - ####"
-            /> -->
 
             <q-input
               dense
@@ -219,17 +211,6 @@
         </q-card-section>
       </q-card>
     </div>
-    <!-- <q-page-sticky
-      position="bottom-left"
-      :offset="[10, 10]"
-    >
-      <q-btn
-        class="text-black"
-        label="voltar"
-        to="/about"
-      />
-    </q-page-sticky>
-  </q-page> -->
     <q-dialog v-model="card">
       <q-card class="my-card">
         <q-img src="../../assets/pages/auth/google-maps.png" />
@@ -319,7 +300,8 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-  </q-page>
+    <!-- </q-page> -->
+  </q-layout>
 </template>
 
 <script>

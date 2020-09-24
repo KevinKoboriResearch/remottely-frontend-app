@@ -267,3 +267,19 @@ salvou mina vida:
 
 - imagens de graca
 https://pixabay.com/
+
+3d animations css:
+- https://bashooka.com/coding/css-3d-design-examples/
+- https://codepen.io/AlbertFeynman/pen/mjXeMV
+- https://codepen.io/waldo/pen/VPBeXQ
+- https://codepen.io/MaxStalker/pen/AktfK
+- https://codepen.io/mimikos/pen/JyYoEe
+- https://codepen.io/neoberg/pen/istyp
+
+tutorial activeClass
+- https://stackoverflow.com/questions/33731939/vue-js-toggle-class-on-click
+
+
+
+NEUMORPHISM:
+- neumorphism-ui-bootstrap-master
